@@ -4,8 +4,8 @@ const apiURLs = {
 
   // User
   createUser: `${baseApiURL}/users`,
-  deleteUser: (id) => `${baseApiURL}/users/${id}`,
-  editUser: (id) => `${baseApiURL}/users/${id}`,
+  deleteUser: jest.fn((id) => `${baseApiURL}/users/${id}`),
+  editUser: jest.fn((id) => `${baseApiURL}/users/${id}`),
 
   // Get resorces of user
   getUser: jest.fn((id) => `${baseApiURL}/users/${id}`),
@@ -20,12 +20,12 @@ const apiURLs = {
   getOneListUserLight: jest.fn(({ userId, listId }) => `${baseApiURL}/users/${userId}/lists/${listId}?light=true`),
 
   // List
-  createList: (id) => `${baseApiURL}/users/${id}/lists`,
-  editList: ({ userId, listId }) => `${baseApiURL}/users/${userId}/lists/${listId}`,
-  deleteList: ({ userId, listId }) => `${baseApiURL}/users/${userId}/lists/${listId}`,
+  createList: jest.fn((id) => `${baseApiURL}/users/${id}/lists`),
+  editList: jest.fn(({ userId, listId }) => `${baseApiURL}/users/${userId}/lists/${listId}`),
+  deleteList: jest.fn(({ userId, listId }) => `${baseApiURL}/users/${userId}/lists/${listId}`),
 
   // Watchlist
-  editWatchlist: (id) => `${baseApiURL}/users/${id}/watchlist`,
+  editWatchlist: jest.fn((id) => `${baseApiURL}/users/${id}/watchlist`),
 
   // Get movie data
   getMovieDetail: jest.fn((id) => `${baseApiURL}/movies/${id}/detail`),
@@ -43,14 +43,14 @@ const apiURLs = {
   getSpecificRateUser: jest.fn((id) => `${baseApiURL}/movies/${id}/ratewUser`),
 
   // Reviews
-  createReview: (id) => `${baseApiURL}/movies/${id}/reviews`,
-  editReview: ({ movieId, reviewId }) => `${baseApiURL}/movies/${movieId}/reviews/${reviewId}`,
-  deleteReview: ({ movieId, reviewId }) => `${baseApiURL}/movies/${movieId}/reviews/${reviewId}`,
+  createReview: jest.fn((id) => `${baseApiURL}/movies/${id}/reviews`),
+  editReview: jest.fn(({ movieId, reviewId }) => `${baseApiURL}/movies/${movieId}/reviews/${reviewId}`),
+  deleteReview: jest.fn(({ movieId, reviewId }) => `${baseApiURL}/movies/${movieId}/reviews/${reviewId}`),
 
   // Rate
-  createRate: (id) => `${baseApiURL}/movies/${id}/rates`,
-  editRate: ({ movieId, rateId }) => `${baseApiURL}/movies/${movieId}/rates/${rateId}`,
-  deleteRate: ({ movieId, rateId }) => `${baseApiURL}/movies/${movieId}/rates/${rateId}`,
+  createRate: jest.fn((id) => `${baseApiURL}/movies/${id}/rates`),
+  editRate: jest.fn(({ movieId, rateId }) => `${baseApiURL}/movies/${movieId}/rates/${rateId}`),
+  deleteRate: jest.fn(({ movieId, rateId }) => `${baseApiURL}/movies/${movieId}/rates/${rateId}`),
 
   // Auth
   authLogIn: `${baseApiURL}/auth/login`,
