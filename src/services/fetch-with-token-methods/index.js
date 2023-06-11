@@ -104,7 +104,7 @@ export async function deleteWithToken(url) {
 }
 
 // PUT
-export async function putWithToken({ url, body }) {
+export async function putWithToken({ url, body, multipart = false } = {}) {
   const token = await new Promise((resolve, reject) => {
     window.grecaptcha.ready(async () => {
       try {
@@ -116,17 +116,28 @@ export async function putWithToken({ url, body }) {
       }
     });
   });
-
-  const response = await fetch(url, {
-    method: 'PUT',
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      recaptcha: token,
-    },
-    body: JSON.stringify(body),
-  });
+  let response;
+  if (multipart) {
+    response = await fetch(url, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        recaptcha: token,
+      },
+      body,
+    });
+  } else {
+    response = await fetch(url, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        recaptcha: token,
+      },
+      body: JSON.stringify(body),
+    });
+  }
 
   if (response.ok) {
     const data = await response.json();

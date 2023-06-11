@@ -125,13 +125,28 @@ describe('put', () => {
     }));
   });
 
-  it('called with valid arguments', async () => {
+  it('called with valid arguments, multiplart set to false by default', async () => {
     const data = await putWithToken({ url, body });
     expect(global.grecaptcha.ready).toHaveBeenCalledTimes(1);
     expect(global.grecaptcha.execute).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch)
       .toHaveBeenCalledWith(url, generateOptions({ method, body: JSON.stringify(body) }));
+    expect(data).toBe(body);
+  });
+
+  it('called with valid arguments and multipart true, set the correct header and body', async () => {
+    const data = await putWithToken({ url, body, multipart: true });
+    expect(global.grecaptcha.ready).toHaveBeenCalledTimes(1);
+    expect(global.grecaptcha.execute).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch)
+      .toHaveBeenCalledWith(url, {
+        method: 'PUT',
+        credentials: 'include',
+        headers: { recaptcha: recaptchaToken },
+        body,
+      });
     expect(data).toBe(body);
   });
 
