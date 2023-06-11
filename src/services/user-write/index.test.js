@@ -43,29 +43,56 @@ describe('createUser', () => {
 });
 
 describe('editUser', () => {
+  // mock formData
+  class FormData {
+    constructor() {
+      this.append = jest.fn((key, value) => Object.assign(this, { [key]: value }));
+    }
+  }
+
+  // mock formData
+  global.FormData = FormData;
+
   const body = {
     username: 'usernameChanged',
     password: 'username1',
-
+    photo: 'src/services/user-write/1.png',
   };
+
+  const dataReturned = { ...body, bio: '' };
+  const formData = new global.FormData();
+  formData.append('username', body.username);
+  formData.append('password', body.password);
+  formData.append('bio', '');
+  formData.append('photo', body.photo);
   const idUsed = '123456789a8798asd7897d4a';
   const urlRight = `${baseApiURL}/users/${idUsed}`;
-  beforeAll(() => {
-    putWithToken.mockImplementation(() => Promise.resolve(body));
+  beforeAll(async () => {
+    putWithToken.mockImplementation(() => Promise.resolve(dataReturned));
   });
   beforeEach(() => {
     apiURLs.editUser.mockClear();
   });
 
-  it('called with valid arguments', async () => {
+  it('called with valid arguments, set bio to empty string by default when it is missing', async () => {
     const data = await api.editUser({ ...body, id: idUsed });
     expect(putWithToken).toHaveBeenCalledTimes(1);
-    expect(putWithToken).toHaveBeenCalledWith({ url: urlRight, body });
+    expect(putWithToken).toHaveBeenCalledWith(
+      {
+        url: urlRight,
+        // This is an instance
+        body: {
+          ...formData,
+          append: expect.any(Function),
+        },
+        multipart: true,
+      },
+    );
     expect(apiURLs.editUser).toHaveBeenCalledWith(idUsed);
-    expect(data).toBe(body);
+    expect(data).toBe(dataReturned);
   });
 
-  it('rejecting with error if some argument is invalid or missing', async () => {
+  it('rejecting with error if some argument is invalid or missing (photo and bio can be omitted)', async () => {
     await expect(api.editUser({ username: 1, password: false })).rejects.toThrow();
     expect(putWithToken).not.toHaveBeenCalled();
   });

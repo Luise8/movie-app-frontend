@@ -10,13 +10,23 @@ export async function createUser({ username, password }) {
   return postWithToken({ url: apiURLs.createUser, body: { username, password } });
 }
 
-export async function editUser({ username, password, id }) {
+export async function editUser({
+  username, password, id, bio = '', photo,
+} = {}) {
   if (typeof username !== 'string' || username === ''
-  || typeof password !== 'string' || password === ''
+    || typeof password !== 'string' || password === ''
+    || typeof bio !== 'string'
   || typeof id !== 'string' || id === '') {
     throw new Error('wrong field');
   }
-  return putWithToken({ url: apiURLs.editUser(id), body: { username, password } });
+  const formData = new FormData();
+
+  formData.append('username', username);
+  formData.append('password', password);
+  formData.append('bio', bio);
+  if (photo) formData.append('photo', photo);
+
+  return putWithToken({ url: apiURLs.editUser(id), body: formData, multipart: true });
 }
 
 export async function deleteUser(id) {
