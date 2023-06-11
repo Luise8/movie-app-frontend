@@ -5,7 +5,7 @@ import { apiURLs, baseApiURL } from '../settings';
 // mock apiURLs
 jest.mock('../settings');
 
-// mock getWithToken
+// mock fetch-with-token-methods
 jest.mock('../fetch-with-token-methods', () => ({
   postWithToken: jest.fn(),
   deleteWithToken: jest.fn(),
