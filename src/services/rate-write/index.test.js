@@ -1,12 +1,12 @@
-import * as api from './index';
-import { postWithToken, deleteWithToken, putWithToken } from '../fetch-with-token-methods';
-import { apiURLs, baseApiURL } from '../settings';
+import * as api from 'src/services/rate-write/';
+import { postWithToken, deleteWithToken, putWithToken } from 'src/services/fetch-with-token-methods';
+import { apiURLs, baseApiURL } from 'src/services/settings';
 
 // mock apiURLs
-jest.mock('../settings');
+jest.mock('src/services/settings');
 
 // mock fetch-with-token-methods
-jest.mock('../fetch-with-token-methods', () => ({
+jest.mock('src/services/fetch-with-token-methods', () => ({
   postWithToken: jest.fn(),
   deleteWithToken: jest.fn(),
   putWithToken: jest.fn(),

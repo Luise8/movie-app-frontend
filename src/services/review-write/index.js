@@ -1,5 +1,5 @@
-import { postWithToken, putWithToken, deleteWithToken } from '../fetch-with-token-methods';
-import { apiURLs } from '../settings';
+import { postWithToken, putWithToken, deleteWithToken } from 'src/services/fetch-with-token-methods';
+import { apiURLs } from 'src/services/settings';
 
 // REVIEW WRITE FUNCTIONS
 export async function createReview({ title, body, id } = {}) {

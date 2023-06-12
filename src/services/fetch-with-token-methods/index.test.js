@@ -1,8 +1,8 @@
 import {
   getWithToken, postWithToken, deleteWithToken, putWithToken,
-} from './index';
+} from 'src/services/fetch-with-token-methods/';
 
-jest.mock('../settings', () => ({
+jest.mock('src/services/settings', () => ({
   recaptchaKey: '123',
 }));
 

@@ -1,5 +1,5 @@
-import { putWithToken } from '../fetch-with-token-methods';
-import { apiURLs } from '../settings';
+import { putWithToken } from 'src/services/fetch-with-token-methods';
+import { apiURLs } from 'src/services/settings';
 
 // WATCHLIST WRITE FUNCTIONS
 export default async function editWatchist({

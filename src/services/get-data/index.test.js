@@ -1,12 +1,12 @@
-import * as api from './index';
-import { getWithToken } from '../fetch-with-token-methods';
-import { apiURLs, baseApiURL } from '../settings';
+import * as api from 'src/services/get-data/';
+import { getWithToken } from 'src/services/fetch-with-token-methods';
+import { apiURLs, baseApiURL } from 'src/services/settings';
 
 // mock apiURLs
-jest.mock('../settings');
+jest.mock('src/services/settings');
 
 // mock getWithToken
-jest.mock('../fetch-with-token-methods', () => ({
+jest.mock('src/services/fetch-with-token-methods', () => ({
   getWithToken: jest.fn(),
 }));
 

@@ -1,12 +1,12 @@
-import editWatchlist from './index';
-import { putWithToken } from '../fetch-with-token-methods';
-import { apiURLs, baseApiURL } from '../settings';
+import editWatchlist from 'src/services/watchlist-write/index';
+import { putWithToken } from 'src/services/fetch-with-token-methods';
+import { apiURLs, baseApiURL } from 'src/services/settings';
 
 // mock apiURLs
-jest.mock('../settings');
+jest.mock('src/services/settings');
 
 // mock putWithToken
-jest.mock('../fetch-with-token-methods', () => ({
+jest.mock('src/services/fetch-with-token-methods', () => ({
   putWithToken: jest.fn(),
 }));
 

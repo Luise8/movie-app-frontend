@@ -1,4 +1,4 @@
-import { recaptchaKey } from '../settings';
+import { recaptchaKey } from 'src/services/settings';
 
 // FETCH METHODS WITH RECAPTCHA TOKEN //
 

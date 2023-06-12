@@ -1,5 +1,5 @@
-import { getWithToken } from '../fetch-with-token-methods';
-import { apiURLs } from '../settings';
+import { getWithToken } from 'src/services/fetch-with-token-methods';
+import { apiURLs } from 'src/services/settings';
 
 // GET FUNCTIONS
 export async function getMovieDetail(id) {
