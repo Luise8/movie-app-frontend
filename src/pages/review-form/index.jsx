@@ -2,6 +2,6 @@ import React from 'react';
 
 export default function ReviewForm() {
   return (
-    <div>ReviewForm</div>
+    <div>Create Review/edit Review</div>
   );
 }

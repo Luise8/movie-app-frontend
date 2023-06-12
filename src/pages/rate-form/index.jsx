@@ -2,6 +2,6 @@ import React from 'react';
 
 export default function RateForm() {
   return (
-    <div>RateForm</div>
+    <div>Create Rate/edit rate</div>
   );
 }
