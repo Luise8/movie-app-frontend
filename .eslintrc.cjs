@@ -1,5 +1,11 @@
 module.exports = {
   env: { browser: true, es2021: true, jest: true },
+          'import/resolver': {
+            node: {
+                paths: ['src'],
+                extensions: ['.js', '.ts', '.d.ts', '.tsx']
+            },
+      },  
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
