@@ -21,5 +21,6 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
 };
