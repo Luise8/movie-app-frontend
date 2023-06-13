@@ -27,41 +27,44 @@ import UserRates from 'src/pages/user-rates';
 import UserReviews from 'src/pages/user-reviews';
 import UserWatchlist from 'src/pages/user-watchlist';
 import WatchlistForm from 'src/pages/watchlist-form';
+import { UserAuthContextProvider } from 'src/context/auth';
 
 export default function App() {
   return (
     <div>
-      <div className="app__container-page">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/user/:id" element={<User />} />
-          <Route path="/user/:id/lists" element={<UserLists />} />
-          <Route path="/user/:userId/lists/:listId" element={<UserOneList />} />
-          <Route path="/user/:id/rates" element={<UserRates />} />
-          <Route path="/user/:id/reviews" element={<UserReviews />} />
-          <Route path="/user/:id/watchlist" element={<UserWatchlist />} />
-          <Route path="/movie/:id" element={<Movie />} />
-          <Route path="/movie/:id/reviews" element={<MovieReviews />} />
-          <Route path="/movie/:movieId/reviews/:reviewId" element={<MovieOneReview />} />
-          <Route path="/review-form" element={<ReviewForm />} />
-          <Route path="/rate-form" element={<RateForm />} />
-          <Route path="/list-create-form" element={<ListCreateForm />} />
-          <Route path="/list-edit-form" element={<ListEditForm />} />
-          <Route path="/watchlist-form" element={<WatchlistForm />} />
-          <Route path="/user-edit-form" element={<UserEditForm />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/latest" element={<Latest />} />
-          <Route path="/popular" element={<Popular />} />
-          <Route path="/trending" element={<Trending />} />
-          <Route path="/genre/:genres" element={<Genre />} />
-          <Route path="/search/:query" element={<Search />} />
-          <Route path="/rated" element={<Rated />} />
-          <Route path="*" element={<PageNotFound />} />
-          <Route path="/credits" element={<Credits />} />
-        </Routes>
-      </div>
+      <UserAuthContextProvider>
+        <div className="app__container-page">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/user/:id" element={<User />} />
+            <Route path="/user/:id/lists" element={<UserLists />} />
+            <Route path="/user/:userId/lists/:listId" element={<UserOneList />} />
+            <Route path="/user/:id/rates" element={<UserRates />} />
+            <Route path="/user/:id/reviews" element={<UserReviews />} />
+            <Route path="/user/:id/watchlist" element={<UserWatchlist />} />
+            <Route path="/movie/:id" element={<Movie />} />
+            <Route path="/movie/:id/reviews" element={<MovieReviews />} />
+            <Route path="/movie/:movieId/reviews/:reviewId" element={<MovieOneReview />} />
+            <Route path="/review-form" element={<ReviewForm />} />
+            <Route path="/rate-form" element={<RateForm />} />
+            <Route path="/list-create-form" element={<ListCreateForm />} />
+            <Route path="/list-edit-form" element={<ListEditForm />} />
+            <Route path="/watchlist-form" element={<WatchlistForm />} />
+            <Route path="/user-edit-form" element={<UserEditForm />} />
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/latest" element={<Latest />} />
+            <Route path="/popular" element={<Popular />} />
+            <Route path="/trending" element={<Trending />} />
+            <Route path="/genre/:genres" element={<Genre />} />
+            <Route path="/search/:query" element={<Search />} />
+            <Route path="/rated" element={<Rated />} />
+            <Route path="*" element={<PageNotFound />} />
+            <Route path="/credits" element={<Credits />} />
+          </Routes>
+        </div>
+      </UserAuthContextProvider>
     </div>
   );
 }
