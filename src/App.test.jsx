@@ -1,9 +1,28 @@
 // app.test.js
 import { screen } from '@testing-library/react';
-import React from 'react';
+import React, from 'react';
 import '@testing-library/jest-dom';
-import renderWithRouter from 'src/app-test-utils';
+import { renderWithRouter, mockUser } from 'src/app-test-utils';
 import App from 'src/App';
+import { useUserAuth } from 'src/context/auth';
+
+// mock apiURLs
+jest.mock('src/services/settings');
+
+// mock getWithToken
+jest.mock('src/services/fetch-with-token-methods', () => ({
+  getWithToken: jest.fn(() => Promise.resolve({ data: 'some data' })),
+}));
+
+// mock useUserAuth hook
+jest.mock('src/context/auth', () => ({
+  useUserAuth: jest.fn(() => ({
+    user: mockUser,
+    fetcAndSethUserData: jest.fn(),
+    logInContext: jest.fn(),
+    logOutContext: jest.fn(),
+  })),
+}));
 
 test('full app rendering default page', async () => {
   renderWithRouter(<App />);
@@ -87,16 +106,34 @@ describe('landing on a existent pages', () => {
   });
 
   it('registration', () => {
+      useUserAuth.mockImplementationOnce(() => ({
+      user: null,
+      fetcAndSethUserData: jest.fn(),
+      logInContext: jest.fn(),
+      logOutContext: jest.fn(),
+    }));
     renderWithRouter(<App />, { route: '/registration' });
     expect(screen.getByText(/registration/i)).toBeInTheDocument();
   });
 
   it('login', () => {
+    useUserAuth.mockImplementationOnce(() => ({
+      user: null,
+      fetcAndSethUserData: jest.fn(),
+      logInContext: jest.fn(),
+      logOutContext: jest.fn(),
+    }));
     renderWithRouter(<App />, { route: '/login' });
     expect(screen.getByText(/login/i)).toBeInTheDocument();
   });
 
   it('signup', () => {
+      useUserAuth.mockImplementationOnce(() => ({
+      user: null,
+      fetcAndSethUserData: jest.fn(),
+      logInContext: jest.fn(),
+      logOutContext: jest.fn(),
+    }));
     renderWithRouter(<App />, { route: '/signup' });
     expect(screen.getByText(/signup/i)).toBeInTheDocument();
   });
