@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { authStatus, logIn, logOut } from 'src/services/auth';
 import { getUser } from 'src/services/get-data';
+import PropTypes from 'prop-types';
 
 const userAuthContext = createContext();
 
@@ -95,6 +96,10 @@ export function UserAuthContextProvider({ children }) {
     </userAuthContext.Provider>
   );
 }
+
+UserAuthContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export function useUserAuth() {
   return useContext(userAuthContext);
