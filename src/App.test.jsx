@@ -1,6 +1,6 @@
 // app.test.js
 import { screen } from '@testing-library/react';
-import React, from 'react';
+import React from 'react';
 import '@testing-library/jest-dom';
 import { renderWithRouter, mockUser } from 'src/app-test-utils';
 import App from 'src/App';
@@ -106,7 +106,7 @@ describe('landing on a existent pages', () => {
   });
 
   it('registration', () => {
-      useUserAuth.mockImplementationOnce(() => ({
+    useUserAuth.mockImplementationOnce(() => ({
       user: null,
       fetcAndSethUserData: jest.fn(),
       logInContext: jest.fn(),
@@ -128,7 +128,7 @@ describe('landing on a existent pages', () => {
   });
 
   it('signup', () => {
-      useUserAuth.mockImplementationOnce(() => ({
+    useUserAuth.mockImplementationOnce(() => ({
       user: null,
       fetcAndSethUserData: jest.fn(),
       logInContext: jest.fn(),
