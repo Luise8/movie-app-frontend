@@ -42,6 +42,7 @@ export function UserAuthContextProvider({ children }) {
   const logOutContext = useCallback(async () => {
     const session = await logOut();
     if (!session?.currentSession.isAuth) {
+      setUser(null);
       setItem('user', '');
     }
   }, []);
