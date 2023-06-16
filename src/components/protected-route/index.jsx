@@ -15,10 +15,10 @@ function ProtectedRoute({ children }) {
   if (isObjectEmpty(user)) {
     return <Loading />;
   }
-  if (!user) {
-    return <Navigate to="/" />;
+  if (user?.username) {
+    return children;
   }
-  return children;
+  return <Navigate to="/" />;
 }
 
 export default ProtectedRoute;
