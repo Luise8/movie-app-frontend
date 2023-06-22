@@ -1,0 +1,13 @@
+.card-grid-items-small {
+    flex-basis: 185px;
+    max-width: 185px;
+}
+
+@media (max-width: 400px) {
+.card-grid-items-small {
+        flex-basis: 150px;
+        flex-shrink: 1;
+        flex-grow: 1;
+    }
+}
+
