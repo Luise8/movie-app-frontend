@@ -4,23 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import App from 'src/App';
 import 'src/index.css';
 import { UserAuthContextProvider } from 'src/context/auth';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#00897b',
-      contrastText: '#000',
-    },
-    secondary: {
-      main: '#651fff',
-    },
-    background: {
-      default: '#000',
-    },
-  },
-});
+import darkTheme from 'src/utils/darkTheme';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
