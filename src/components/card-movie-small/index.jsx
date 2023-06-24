@@ -55,7 +55,7 @@ export default function CardMovieSmall({
                 spacing={0.5}
 
               >
-                <Rating name="customized-1" defaultValue={1} max={1} size="small" />
+                <Rating name="customized-1" defaultValue={1} max={1} size="small" readOnly />
                 <Typography variant="body2">
                   {rateAverage}
                 </Typography>
