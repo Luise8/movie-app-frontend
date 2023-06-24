@@ -3,13 +3,12 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CardMovieSmall from 'src/components/card-movie-small';
 import { MemoryRouter } from 'react-router-dom';
-import moviesPopularExample from 'src/utils/movies-popular.example';
-import moviesRatedExample from 'src/utils/movies-rated-example';
 import linkRoutes from 'src/utils/link-routes';
 import appResourcesPath from 'src/utils/app-resources-path';
+import testDbHelpers from 'src/utils/test-db-helpers';
 
 it('right render without rating data', () => {
-  const movieWithOutRating = moviesPopularExample.results[0];
+  const movieWithOutRating = testDbHelpers.moviesPopular.results[0];
   render(
     <MemoryRouter>
       <CardMovieSmall cardData={movieWithOutRating} />
@@ -29,7 +28,7 @@ it('right render without rating data', () => {
 });
 
 it('right render with data with rating', () => {
-  const movieWithRating = moviesRatedExample.results[0];
+  const movieWithRating = testDbHelpers.moviesRated.results[0];
   render(
     <MemoryRouter>
       <CardMovieSmall cardData={movieWithRating} />
@@ -38,7 +37,7 @@ it('right render with data with rating', () => {
 
   // Has the image
   const img = screen.getByRole('img', {
-    name: movieWithRating.title,
+    name: movieWithRating.name,
   });
 
   expect(img).toBeInTheDocument();
@@ -49,16 +48,17 @@ it('right render with data with rating', () => {
   expect(screen.getByText(new RegExp(movieWithRating.name, 'i'))).toBeInTheDocument();
 
   // start rating component
-  expect(screen.getByTestId('StarIcon')).toBeInTheDocument();
-  expect(screen.getByText(/1 star/i)).toBeInTheDocument();
-  expect(screen.getByText(/1 star/i)).toHaveClass('MuiRating-visuallyHidden');
+  const rating = screen.getByRole('img', {
+    name: /1 star/i,
+  });
+  expect(rating).toBeInTheDocument();
   // end rating component
 
   expect(screen.getByText(new RegExp(movieWithRating.rateAverage, 'i'))).toBeInTheDocument();
 });
 
 it('right render without rating data and without photo/poster_path', () => {
-  const movieWithOutRating = moviesPopularExample.results[0];
+  const movieWithOutRating = testDbHelpers.moviesPopular.results[0];
   render(
     <MemoryRouter>
       <CardMovieSmall cardData={{ ...movieWithOutRating, poster_path: '' }} />
@@ -74,7 +74,7 @@ it('right render without rating data and without photo/poster_path', () => {
 });
 
 it('right classes', () => {
-  const movieWithOutRating = moviesPopularExample.results[0];
+  const movieWithOutRating = testDbHelpers.moviesPopular.results[0];
   render(
     <MemoryRouter>
       <CardMovieSmall cardData={movieWithOutRating} />
