@@ -1,0 +1,83 @@
+.card-review-user.MuiCard-root {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: relative;
+  width: 1000px;
+}
+
+.card-review-user-container-image.MuiCardActionArea-root {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 185px;
+  border-left: 2px dotted #747474;
+  border-right: 2px dotted #747474;
+}
+
+.card-review-user-card-media.MuiCardMedia-root {
+  width: 185px;
+  height: 278px;
+  background-color: #747474;
+}
+
+.card-review-user-conainer-right.MuiBox-root {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow-wrap: break-word;
+  width: 75%;
+}
+
+.card-review-user-title-1.MuiCardHeader-root {
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.card-review-user-container-right-body.MuiCardContent-root {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.card-review-user-container-title-2-date.MuiBox-root {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 1100px) {
+  .card-review-user.MuiCard-root {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 87vw;
+  }
+  .card-review-user-conainer-right.MuiBox-root {
+    width: 70%;
+  }
+}
+
+@media (max-width: 800px) {
+  .card-review-user.MuiCard-root {
+    width: 83vw;
+  }
+  .card-review-user-conainer-right.MuiBox-root {
+    width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-review-user.MuiCard-root {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 80vw;
+  }
+  .card-review-user-conainer-right.MuiBox-root {
+    width: 100%;
+  }
+
+  .card-review-user-container-image.MuiCardActionArea-root {
+    display: none;
+  }
+}
