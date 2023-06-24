@@ -10,6 +10,7 @@ export default function ListGridMovies({ list }) {
   return (
     <Grid
       container
+      sx={{ maxWidth: '1000px' }}
       spacing={2}
       justifyContent="center"
       alignItems="flex-start"
