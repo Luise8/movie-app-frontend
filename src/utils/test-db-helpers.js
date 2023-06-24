@@ -13,7 +13,7 @@ const testDbHelpers = {
       id: '64501354c41b5db06e01c5a4',
     },
     total: 2,
-    page_size: 10,
+    page_size: 20,
     page: 0,
     prev_page: '',
     next_page: '',
