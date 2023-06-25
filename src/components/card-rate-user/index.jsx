@@ -81,7 +81,7 @@ export default function CardReviewUser({
               <Typography
                 variant="h6"
                 component="h3"
-                color="secondary"
+                sx={{ color: theme.palette.secondary.light }}
               >
                 Your rating
               </Typography>
@@ -106,7 +106,7 @@ export default function CardReviewUser({
               <Typography
                 variant="h6"
                 component="h3"
-                color="secondary"
+                sx={{ color: theme.palette.secondary.light }}
               >
                 The movie average
               </Typography>
