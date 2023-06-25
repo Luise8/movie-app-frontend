@@ -1,0 +1,30 @@
+.card-review-movie.MuiCard-root {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: relative;
+  width: 1000px;
+  overflow-wrap: break-word;
+}
+
+.card-review-movie-card-content.MuiCardContent-root {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+@media (max-width: 1100px) {
+  .card-review-movie.MuiCard-root {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 87vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .card-review-movie.MuiCard-root {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
