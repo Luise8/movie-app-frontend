@@ -1,0 +1,50 @@
+.card-rate-user.MuiCard-root {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: relative;
+}
+
+.card-rate-user-container-image.MuiCardActionArea-root {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 185px;
+  border-left: 2px dotted #747474;
+  border-right: 2px dotted #747474;
+}
+
+.card-rate-user-card-media.MuiCardMedia-root {
+  width: 185px;
+  height: 278px;
+  background-color: #747474;
+}
+
+.card-rate-user-title-1 {
+  margin-bottom: 0;
+}
+
+.card-rate-user-all-rates-container {
+  margin-bottom: 10px;
+}
+
+.card-rate-user-rating-row-container.MuiBox-root {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 5px;
+}
+
+@media (max-width: 850px) {
+  .card-rate-user-rating-row-container.MuiBox-root {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 650px) {
+  .card-rate-user-container-image.MuiCardActionArea-root {
+    display: none;
+  }
+}
