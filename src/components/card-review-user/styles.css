@@ -59,19 +59,15 @@
 }
 
 @media (max-width: 800px) {
-  .card-review-user.MuiCard-root {
-    width: 83vw;
-  }
   .card-review-user-conainer-right.MuiBox-root {
     width: 60%;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .card-review-user.MuiCard-root {
     padding-left: 5px;
     padding-right: 5px;
-    width: 80vw;
   }
   .card-review-user-conainer-right.MuiBox-root {
     width: 100%;
