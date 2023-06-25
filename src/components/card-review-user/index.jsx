@@ -41,8 +41,8 @@ export default function CardReviewUser({
         />
       </CardActionArea>
       <Box
-        data-testid="card-review-user-conainer-right"
-        className="card-review-user-conainer-right"
+        data-testid="card-review-user-container-right"
+        className="card-review-user-container-right"
       >
         <CardActionArea
           data-testid="link-title"

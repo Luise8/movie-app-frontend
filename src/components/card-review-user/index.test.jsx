@@ -119,7 +119,7 @@ it('right classes and inline styles', () => {
   });
   expect(img).toHaveClass('card-review-user-card-media');
 
-  expect(screen.getByTestId('card-review-user-conainer-right')).toHaveClass('card-review-user-conainer-right');
+  expect(screen.getByTestId('card-review-user-container-right')).toHaveClass('card-review-user-container-right');
 
   const h2 = screen.getByRole('heading', {
     level: 2,
