@@ -160,17 +160,15 @@ it('right classes and inline styles', () => {
   const ratingRowContainers = screen.getAllByTestId('card-rate-user-rating-row-container');
   ratingRowContainers.forEach((item) => expect(item).toHaveClass('card-rate-user-rating-row-container'));
 
-  const secondaryColor = testHelperFunctions
-    .colorConversion.hexStringToRgb(darkTheme.palette.secondary.main);
   expect(screen.getByRole('heading', {
     level: 3,
     name: /your rating/i,
-  })).toHaveStyle(`color: ${secondaryColor}`);
+  })).toHaveStyle(`color: ${darkTheme.palette.secondary.light}`);
 
   expect(screen.getByRole('heading', {
     level: 3,
     name: /The movie average/i,
-  })).toHaveStyle(`color: ${secondaryColor}`);
+  })).toHaveStyle(`color: ${darkTheme.palette.secondary.light}`);
 
   const primaryColor = testHelperFunctions
     .colorConversion.hexStringToRgb(darkTheme.palette.primary.main);
