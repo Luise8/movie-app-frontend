@@ -1,4 +1,4 @@
-const { createTheme } = require('@mui/material');
+import { createTheme } from '@mui/material';
 
 const darkTheme = createTheme({
   palette: {
