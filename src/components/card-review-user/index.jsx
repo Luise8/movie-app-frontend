@@ -62,13 +62,13 @@ export default function CardReviewUser({
             alignItems="center"
             spacing={0.5}
           >
-            <Rating name="customized-1" defaultValue={1} max={1} readOnly />
+            <Rating name="customized-1" defaultValue={movieId.rateAverage ? 1 : 0} max={1} readOnly />
             <Typography
               variant="body1"
               component="div"
               data-testid="ratingAverage"
             >
-              {movieId.rateAverage}
+              {movieId.rateAverage > 0 ? movieId.rateAverage : ''}
             </Typography>
           </Stack>
           <Box className="card-review-user-container-title-2-date" data-testid="card-review-user-container-title-2-date">

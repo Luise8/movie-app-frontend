@@ -26,10 +26,15 @@ it('right render with image provided', () => {
   expect(img).toBeInTheDocument();
   expect(img).toHaveAttribute('src', review.movieId.photo);
 
+  const ratingIconName = review.movieId.rateAverage > 0 ? '1 Star' : '0 Stars';
   const rating = screen.getByRole('img', {
-    name: /1 star/i,
+    name: ratingIconName,
   });
+
   expect(rating).toBeInTheDocument();
+
+  const ratingAverageText = review.movieId.rateAverage > 0 ? review.movieId.rateAverage : '';
+  expect(screen.getByTestId('ratingAverage')).toHaveTextContent(ratingAverageText);
 
   expect(screen.getByRole('heading', {
     level: 2,
@@ -40,8 +45,6 @@ it('right render with image provided', () => {
     level: 3,
     name: review.title,
   })).toBeInTheDocument();
-
-  expect(screen.getByTestId('ratingAverage')).toHaveTextContent(review.movieId.rateAverage);
 
   expect(screen.getByText(new RegExp(new Date(review.date).toUTCString(), 'i'))).toBeInTheDocument();
 
@@ -52,18 +55,12 @@ it('right render with image provided', () => {
   expect(screen.getByTestId('link-title')).toHaveAttribute('href', linkRoutes.cardReviewUser(review.movieId.idTMDB));
 });
 
-it('right render without image provided', () => {
-  const review = testDbHelpers.reviewsUser.results[0];
+it('right render without image provided and rateAverage 0', () => {
+  const review = { ...testDbHelpers.reviewsUser.results[0], movieId: { ...testDbHelpers.reviewsUser.results[0].movieId, photo: '', rateAverage: 0 } };
 
   render(
     <MemoryRouter>
-      <CardReviewUser data={{
-        ...review,
-        movieId: {
-          ...review.movieId, photo: '',
-        },
-      }}
-      />
+      <CardReviewUser data={review} />
     </MemoryRouter>,
   );
 
@@ -74,10 +71,16 @@ it('right render without image provided', () => {
 
   expect(img).toBeInTheDocument();
   expect(img).toHaveAttribute('src', appResourcesPath.cardMovieSmall.noImageAvailable);
+
+  const ratingIconName = review.movieId.rateAverage > 0 ? '1 Star' : '0 Stars';
   const rating = screen.getByRole('img', {
-    name: /1 star/i,
+    name: ratingIconName,
   });
+
   expect(rating).toBeInTheDocument();
+
+  const ratingAverageText = review.movieId.rateAverage > 0 ? review.movieId.rateAverage : '';
+  expect(screen.getByTestId('ratingAverage')).toHaveTextContent(ratingAverageText);
 
   expect(screen.getByRole('heading', {
     level: 2,
@@ -88,8 +91,6 @@ it('right render without image provided', () => {
     level: 3,
     name: review.title,
   })).toBeInTheDocument();
-
-  expect(screen.getByTestId('ratingAverage')).toHaveTextContent(review.movieId.rateAverage);
 
   expect(screen.getByText(new RegExp(new Date(review.date).toUTCString(), 'i'))).toBeInTheDocument();
 
