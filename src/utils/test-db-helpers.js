@@ -2467,16 +2467,22 @@ const testDbHelpers = {
       {
         title: 'Third review made',
         body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vita',
-        date: '2023-06-16T18:06:45.959Z',
-        userId: '64501354c41b5db06e01c5a5',
+        date: '2023-06-24T22:38:37.340Z',
+        userId: {
+          username: 'userNumber1',
+          id: '64501354c41b5db06e01c5a5',
+        },
         movieId: '6447e80aa1f0cd363649d594',
-        id: '648ca4b7bc74b10394b09135',
+        id: '6497706fd420c043780fe181',
       },
       {
         title: 'First review made',
         body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitaLorem ipsum dolor sit amet, consectetuer adipiscing entum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vita',
-        date: '2023-06-16T18:06:45.959Z',
-        userId: '64501354c41b5db06e01c5a4',
+        date: '2023-06-24T22:38:37.340Z',
+        userId: {
+          username: 'userNumber0Change1',
+          id: '64501354c41b5db06e01c5a4',
+        },
         movieId: '6447e80aa1f0cd363649d594',
         id: '64493b16236a412ea5eb6550',
       },
