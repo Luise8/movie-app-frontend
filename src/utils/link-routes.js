@@ -5,6 +5,7 @@ const linkRoutes = {
   cardRateUser: (id) => `/movie/${id}`,
   cardMovieMedium: (id) => `/movie/${id}`,
   cardMovieEditItem: (id) => `/movie/${id}`,
+  ListMovieItem: ({ userId, listId }) => `/user/${userId}/${listId}`,
   movie: (id) => `movie/${id}`,
   reviewsMovie: (id) => `movie/${id}/reviews`,
   reviewOneMovie: (id) => `movie/${id}/reviews`,
