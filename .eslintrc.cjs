@@ -22,5 +22,6 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'react/jsx-props-no-spreading': 'off',
   },
 };
