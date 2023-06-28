@@ -47,8 +47,6 @@ export default function ModalConfirmation({
         <Button autoFocus onClick={handleClose}>
           Cancel
         </Button>
-      </DialogActions>
-      <DialogActions>
         <Button autoFocus onClick={handleConfirm}>
           Accept
         </Button>
