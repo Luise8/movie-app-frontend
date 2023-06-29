@@ -66,11 +66,12 @@ export async function getMoviesByGenre({ genres, page = 1 } = {}) {
   return getWithToken(apiURLs.getMoviesByGenre({ genres, page }));
 }
 
-export async function getMoviesBySearch({ query = '', page = 1 } = {}) {
-  if (typeof query !== 'string' || typeof page !== 'number') {
+export async function getMoviesBySearch({ query = '', page = 1, isEncoded = false } = {}) {
+  if (typeof query !== 'string'
+    || typeof page !== 'number' || typeof isEncoded !== 'boolean') {
     throw new Error('wrong field');
   }
-  return getWithToken(apiURLs.getMoviesBySearch({ query, page }));
+  return getWithToken(apiURLs.getMoviesBySearch({ query, page, isEncoded }));
 }
 
 export async function getSpecificReviewUser(id) {

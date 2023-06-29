@@ -570,7 +570,8 @@ describe('getMoviesBySearch', () => {
   };
 
   const query = 'The Fast and the Furious';
-  const urlRight = `${baseApiURL}/movies/search?query=${encodeURIComponent(query)}&page=1`;
+  const queryEncoded = encodeURIComponent(query);
+  const urlRight = `${baseApiURL}/movies/search?query=${queryEncoded}&page=1`;
   beforeAll(() => {
     getWithToken.mockImplementation(() => Promise.resolve(body));
   });
@@ -583,7 +584,17 @@ describe('getMoviesBySearch', () => {
     const data = await api.getMoviesBySearch({ query });
     expect(getWithToken).toHaveBeenCalledTimes(1);
     expect(getWithToken).toHaveBeenCalledWith(urlRight);
-    expect(apiURLs.getMoviesBySearch).toHaveBeenCalledWith({ query, page: 1 });
+    expect(apiURLs.getMoviesBySearch).toHaveBeenCalledWith({ query, page: 1, isEncoded: false });
+    expect(data).toBe(body);
+  });
+
+  it('right handle when isEncoded is true', async () => {
+    const data = await api
+      .getMoviesBySearch({ query: queryEncoded, isEncoded: true });
+    expect(getWithToken).toHaveBeenCalledTimes(1);
+    expect(getWithToken).toHaveBeenCalledWith(urlRight);
+    expect(apiURLs.getMoviesBySearch)
+      .toHaveBeenCalledWith({ query: queryEncoded, page: 1, isEncoded: true });
     expect(data).toBe(body);
   });
 

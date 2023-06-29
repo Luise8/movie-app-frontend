@@ -38,7 +38,7 @@ const apiURLs = {
   getRatedMovies: jest.fn((page) => `${baseApiURL}/movies/rated?page=${page}`),
   getMoviesByGenre: jest.fn(({ page, genres }) => `${baseApiURL}/movies/genre?genres=${genres}&page=${page}`),
   // Enconded query
-  getMoviesBySearch: jest.fn(({ page, query }) => `${baseApiURL}/movies/search?query=${encodeURIComponent(query)}&page=${page}`),
+  getMoviesBySearch: jest.fn(({ page, query, isEncoded }) => (isEncoded ? `${baseApiURL}/movies/search?query=${query}&page=${page}` : `${baseApiURL}/movies/search?query=${encodeURIComponent(query)}&page=${page}`)),
   getSpecificReviewUser: jest.fn((id) => `${baseApiURL}/movies/${id}/reviewUser`),
   getSpecificRateUser: jest.fn((id) => `${baseApiURL}/movies/${id}/ratewUser`),
 

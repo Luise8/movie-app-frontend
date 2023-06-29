@@ -38,7 +38,7 @@ const apiURLs = {
   getRatedMovies: (page) => `${baseApiURL}/movies/rated?page=${page}`,
   getMoviesByGenre: ({ page, genres }) => `${baseApiURL}/movies/genre?genres=${genres}&page=${page}`,
   // Enconded query
-  getMoviesBySearch: ({ page, query }) => `${baseApiURL}/movies/search?query=${encodeURIComponent(query)}&page=${page}`,
+  getMoviesBySearch: ({ page, query, isEncoded }) => (isEncoded ? `${baseApiURL}/movies/search?query=${query}&page=${page}` : `${baseApiURL}/movies/search?query=${encodeURIComponent(query)}&page=${page}`),
   getSpecificReviewUser: (id) => `${baseApiURL}/movies/${id}/reviewUser`,
   getSpecificRateUser: (id) => `${baseApiURL}/movies/${id}/ratewUser`,
 
