@@ -1,0 +1,166 @@
+.responsive-app-bar.MuiAppBar-root {
+  position: static;
+  width: 100vw;
+}
+
+.responsive-app-bar-container {
+  max-width: 1000px;
+}
+
+.responsive-app-bar-hamburger.MuiBox-root {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .responsive-app-bar-hamburger.MuiBox-root {
+    flex-grow: 0;
+    display: flex;
+    text-align: center;
+  }
+}
+
+.responsive-app-bar-app-icon-md900.MuiSvgIcon-root {
+  display: none;
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-app-icon-md900.MuiSvgIcon-root {
+    display: flex;
+    margin-right: 8px; /* mr1 */
+    margin-left: auto;
+  }
+}
+
+.responsive-app-bar-logo-text-md900.MuiTypography-root {
+  display: none;
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-logo-text-md900.MuiTypography-root {
+    display: flex;
+    font-family: monospace;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    text-decoration: none;
+    margin-right: auto;
+  }
+}
+
+.responsive-app-bar-app-icon.MuiSvgIcon-root {
+  display: flex;
+  margin-right: 8px; /* mr1 */
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-app-icon.MuiSvgIcon-root {
+    display: none;
+  }
+}
+
+.responsive-app-bar-logo-text.MuiTypography-root {
+  display: flex;
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 0.3rem;
+  text-decoration: none;
+  margin-right: 16px; /* mr2 */
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-logo-text.MuiTypography-root {
+    display: none;
+  }
+}
+
+.responsive-app-bar-container-left-buttons.MuiBox-root {
+  display: flex;
+  flex-grow: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-container-left-buttons.MuiBox-root {
+    display: none;
+  }
+}
+
+.responsive-app-bar-container-left-buttons.MuiBox-root .MuiButton-root {
+  color: #fff;
+}
+
+.responsive-app-bar-container-search-button.MuiBox-root {
+  margin-left: auto;
+  padding-right: 10px;
+}
+
+.responsive-app-bar-container-search-button.MuiBox-root .MuiButton-root {
+  display: flex;
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-container-search-button.MuiBox-root {
+    margin-left: 0;
+  }
+
+  .responsive-app-bar-container-search-button.MuiBox-root .MuiButton-root {
+    display: none;
+  }
+}
+
+.responsive-app-bar-container-search-button.MuiBox-root .MuiIconButton-root {
+  display: none;
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-container-search-button.MuiBox-root .MuiIconButton-root {
+    display: flex;
+  }
+}
+
+.responsive-app-bar-container-genre-button.MuiBox-root {
+  display: flex;
+  flex-grow: 0;
+  padding-right: 10px;
+}
+
+.responsive-app-bar-container-genre-button.MuiBox-root .MuiButton-root {
+  color: #fff;
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-container-genre-button.MuiBox-root {
+    display: none;
+  }
+}
+
+.responsive-app-bar-container-settings-menu.MuiBox-root {
+  flex-grow: 0;
+}
+
+.responsive-app-bar-container-settings-menu.MuiBox-root .MuiIconButton-root {
+  padding: 1px;
+}
+
+.responsive-app-bar-settings-menu {
+  margin-top: 45px;
+}
+
+/* md */
+@media (max-width: 900px) {
+  .responsive-app-bar-settings-menu {
+    margin-top: 40px;
+  }
+}
+
+.responsive-app-bar-alert {
+  margin-bottom: 16px; /* mb2 */
+}
