@@ -1,0 +1,4 @@
+/* hide repcaptcha */
+.grecaptcha-badge {
+  visibility: hidden;
+}
