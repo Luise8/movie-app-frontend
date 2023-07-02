@@ -22,6 +22,11 @@ const linkRoutes = {
   movie: (id) => `movie/${id}`,
   reviewsMovie: (id) => `movie/${id}/reviews`,
   reviewOneMovie: (id) => `movie/${id}/reviews`,
+  footer: {
+    website: 'https://luisegamez.netlify.app/',
+    github: 'https://github.com/Luise8',
+    linkedin: 'https://www.linkedin.com/in/luis-e-gamez-prado/',
+  },
 
 };
 
