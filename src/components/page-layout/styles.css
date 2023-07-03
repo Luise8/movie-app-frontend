@@ -1,0 +1,13 @@
+.page-layout.MuiContainer-root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 1px;
+}
+.page-layout.MuiContainer-root .container-main {
+  flex-grow: 1;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
