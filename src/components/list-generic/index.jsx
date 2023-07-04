@@ -30,11 +30,12 @@ export default function ListGeneric({ list, renderItem, propKey }) {
 }
 
 ListGeneric.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  list: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)),
   renderItem: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   propKey: PropTypes.string,
 };
 
 ListGeneric.defaultProps = {
   propKey: undefined,
+  list: [],
 };
