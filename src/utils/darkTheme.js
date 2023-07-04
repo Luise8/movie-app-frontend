@@ -10,9 +10,6 @@ const darkTheme = createTheme({
     secondary: {
       main: '#651fff',
     },
-    background: {
-      default: '#000',
-    },
   },
 });
 
