@@ -11,8 +11,7 @@ import PageLayout from 'src/components/page-layout';
 import helperFunctions from 'src/utils/helper-functions';
 
 export default function Error() {
-  /* const { user } = useUserAuth(); */
-  const user = null;
+  const { user } = useUserAuth();
 
   if (helperFunctions.isObjectEmpty(user)) return <Loading />;
 
