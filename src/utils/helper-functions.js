@@ -4,5 +4,12 @@ const helperFunctions = {
       current[prop] === item[prop]
     )));
   },
+  isObjectEmpty(objectName) {
+    return (
+      objectName
+      && Object.keys(objectName).length === 0
+      && objectName.constructor === Object
+    );
+  },
 };
 export default helperFunctions;
