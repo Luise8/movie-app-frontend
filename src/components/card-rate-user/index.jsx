@@ -14,7 +14,7 @@ import linkRoutes from 'src/utils/link-routes';
 import appResourcesPath from 'src/utils/app-resources-path';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-export default function CardReviewUser({
+export default function CardRateUser({
   data,
 }) {
   const {
@@ -51,7 +51,7 @@ export default function CardReviewUser({
             title={`${movieId.name}${releaseDate}`}
             component="h2"
             className="card-rate-user-title-1"
-            sx={{ color: theme.palette.primary.main }}
+            sx={{ color: 'primary.main' }}
           />
         </CardActionArea>
         <CardContent>
@@ -81,7 +81,7 @@ export default function CardReviewUser({
               <Typography
                 variant="h6"
                 component="h3"
-                sx={{ color: theme.palette.secondary.light }}
+                sx={{ color: 'secondary.light' }}
               >
                 Your rating
               </Typography>
@@ -106,7 +106,7 @@ export default function CardReviewUser({
               <Typography
                 variant="h6"
                 component="h3"
-                sx={{ color: theme.palette.secondary.light }}
+                sx={{ color: 'secondary.light' }}
               >
                 The movie average
               </Typography>
@@ -132,7 +132,7 @@ export default function CardReviewUser({
   );
 }
 
-CardReviewUser.propTypes = {
+CardRateUser.propTypes = {
   data: PropTypes.shape({
     value: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
