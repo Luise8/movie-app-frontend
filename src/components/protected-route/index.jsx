@@ -18,7 +18,7 @@ function ProtectedRoute({ children }) {
   if (user?.username) {
     return children;
   }
-  return <Navigate to="/" />;
+  return <Navigate to="/registration" />;
 }
 
 export default ProtectedRoute;
