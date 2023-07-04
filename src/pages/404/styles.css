@@ -1,0 +1,26 @@
+.e404 {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+.e404-container.MuiGrid-container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px !important;
+  height: 100%;
+}
+
+.e404-container-image.MuiGrid-item {
+  width: 200px;
+  max-width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.e404-container-image.MuiGrid-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}

@@ -2,6 +2,7 @@ import websiteIcon from 'src/assets/my-website-logo.png';
 import userDefaultIcon from 'src/assets/user-default-icon.svg';
 import errorIcon from 'src/assets/error.png';
 import noImageAvailable from 'src/assets/no-image-available-card-movie-small.jpg';
+import e404 from 'src/assets/404.jpg';
 
 const appResourcesPath = {
   cardMovieSmall: {
@@ -10,5 +11,6 @@ const appResourcesPath = {
   userDefaultIcon,
   myWebsiteIcon: websiteIcon,
   errorIcon,
+  e404,
 };
 export default appResourcesPath;
