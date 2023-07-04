@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {
   Box,
-  CardActionArea, CardHeader, Grid, IconButton, Rating, Stack, useTheme,
+  CardActionArea, CardHeader, Grid, IconButton, Rating, Stack,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import 'src/components/card-movie-edit-item/styles.css';
@@ -21,7 +21,6 @@ export default function CardMovieEditItem({
     name, photo, release_date: release, idTMDB, rateAverage, handleDelete, index,
   } = data;
   const releaseDate = release && typeof release === 'string' ? `${release.slice(0, 4)}` : '';
-  const theme = useTheme();
 
   return (
     <Card
@@ -55,7 +54,7 @@ export default function CardMovieEditItem({
             component="h2"
             className="card-movie-edit-item-title-1"
             titleTypographyProps={{ variant: 'body1' }}
-            sx={{ color: theme.palette.primary.light }}
+            sx={{ color: 'primary.light' }}
           />
         </CardActionArea>
         <CardContent data-testid="card-movie-edit-item-container-right-body" className="card-movie-edit-item-container-right-body">

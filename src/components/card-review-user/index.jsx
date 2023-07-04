@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {
   Box,
-  CardActionArea, CardHeader, Rating, Stack, useTheme,
+  CardActionArea, CardHeader, Rating, Stack,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import 'src/components/card-review-user/styles.css';
@@ -20,7 +20,6 @@ export default function CardReviewUser({
     title, body, date, movieId,
   } = data;
   const releaseDate = movieId.release_date && typeof movieId.release_date === 'string' ? ` (${movieId.release_date.slice(0, 4)})` : '';
-  const theme = useTheme();
 
   return (
     <Card
@@ -53,7 +52,7 @@ export default function CardReviewUser({
             title={`${movieId.name}${releaseDate}`}
             component="h2"
             className="card-review-user-title-1"
-            sx={{ color: theme.palette.primary.main }}
+            sx={{ color: 'primary.main' }}
           />
         </CardActionArea>
         <CardContent data-testid="card-review-user-container-right-body" className="card-review-user-container-right-body">

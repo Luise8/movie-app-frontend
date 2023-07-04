@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {
-  CardActionArea, CardHeader, Grid, useTheme,
+  CardActionArea, CardHeader, Grid,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import 'src/components/card-review-movie/styles.css';
@@ -17,8 +17,6 @@ export default function CardReviewMovie({
     title, body, date, userId,
   } = data;
 
-  const theme = useTheme();
-
   return (
     <Card
       data-testid="card-review-movie"
@@ -30,7 +28,7 @@ export default function CardReviewMovie({
           <Grid container spacing={2}>
             <Grid item>
               <CardActionArea
-                sx={{ color: theme.palette.primary.light }}
+                sx={{ color: 'primary.light' }}
                 component={Link}
                 to={linkRoutes.cardReviewMovie(userId.id)}
                 data-testid="link-user"
