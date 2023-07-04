@@ -18,7 +18,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
 import { Alert, Collapse } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import PropTypes from 'prop-types';
 import linkRoutes from 'src/utils/link-routes';
 import appResourcesPath from 'src/utils/app-resources-path';
 import 'src/components/responsive-app-bar/styles.css';
@@ -26,8 +25,10 @@ import ModalNotification from 'src/components/modal-notification';
 import ModalGenre from 'src/components/modal-genre';
 import ModalSearch from 'src/components/modal-search';
 import BackToTop from 'src/components/back-to-top';
+import { useUserAuth } from 'src/context/auth';
 
-function ResponsiveAppBar({ user, logOut }) {
+function ResponsiveAppBar() {
+  const { user, logOutContext: logOut } = useUserAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [modalLogOut, setModalLogOut] = useState(false);
@@ -362,14 +363,3 @@ function ResponsiveAppBar({ user, logOut }) {
   );
 }
 export default ResponsiveAppBar;
-
-ResponsiveAppBar.propTypes = {
-  logOut: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  }),
-};
-ResponsiveAppBar.defaultProps = {
-  user: null,
-};

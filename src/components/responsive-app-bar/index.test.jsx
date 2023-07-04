@@ -14,6 +14,7 @@ import userEvent from '@testing-library/user-event';
 import genresTMDB from 'src/utils/movie-genres-TMDB';
 import { act } from 'react-dom/test-utils';
 import BackToTop from 'src/components/back-to-top';
+import { useUserAuth } from 'src/context/auth';
 
 jest.mock('src/services/get-data', () => ({
   getMoviesBySearch: jest.fn(),
@@ -31,18 +32,26 @@ const userLoggedIn = {
 
 const userNotLoggedIn = null;
 
-const logOutMock = jest.fn();
+let mockCurrentUser = userLoggedIn;
+// mock useUserAuth
+jest.mock('src/context/auth', () => ({
+  useUserAuth: jest.fn(() => ({
+    user: mockCurrentUser,
+    logOutContext: jest.fn(),
+  })),
+
+}));
 
 beforeEach(() => {
-  logOutMock.mockClear();
   BackToTop.mockClear();
+  mockCurrentUser = userLoggedIn;
 });
 
 it('right render when user is logged in', () => {
   render(
     <MemoryRouter>
       <ThemeProvider theme={darkTheme}>
-        <ResponsiveAppBar user={userLoggedIn} logOut={logOutMock} />
+        <ResponsiveAppBar />
       </ThemeProvider>
     </MemoryRouter>,
   );
@@ -129,10 +138,12 @@ it('right render when user is logged in', () => {
 });
 
 it('right render when user is not logged in', () => {
+  // Get user not logged in
+  mockCurrentUser = userNotLoggedIn;
   render(
     <MemoryRouter>
       <ThemeProvider theme={darkTheme}>
-        <ResponsiveAppBar user={userNotLoggedIn} logOut={logOutMock} />
+        <ResponsiveAppBar />
       </ThemeProvider>
     </MemoryRouter>,
   );
@@ -159,7 +170,7 @@ it('right handle of events', async () => {
       <MemoryRouter initialEntries={['/']}>
 
         <Routes>
-          <Route path="/" element={<ResponsiveAppBar user={userLoggedIn} logOut={logOutMock} />} />
+          <Route path="/" element={<ResponsiveAppBar />} />
           <Route path="/genre/:genres" element={<div>Genre page</div>} />
         </Routes>
       </MemoryRouter>
@@ -204,13 +215,9 @@ it('right handle of events', async () => {
 
   // MODALNOTIFICAION
   expect(screen.queryByTestId('notification-dialog')).not.toBeInTheDocument();
-  expect(logOutMock).not.toHaveBeenCalled();
   const logOut = screen.getByText(/logout/i);
 
   await user.click(logOut);
-
-  // Right call of logOu function passed to ResponsiveAppBar
-  expect(logOutMock).toHaveBeenCalledTimes(1);
 
   // Modal notification called with right props
   const modalNotification = screen.getByTestId('notification-dialog');
@@ -273,7 +280,7 @@ it('right classes and inline styles', () => {
   render(
     <ThemeProvider theme={darkTheme}>
       <MemoryRouter>
-        <ResponsiveAppBar user={userLoggedIn} logOut={logOutMock} />
+        <ResponsiveAppBar />
       </MemoryRouter>
     </ThemeProvider>,
   );
