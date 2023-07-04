@@ -1,0 +1,25 @@
+.error {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+.error-container.MuiGrid-container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+}
+
+.error-container-image.MuiGrid-item {
+  width: 100px;
+  max-width: 100px;
+  height: 100px;
+
+  position: relative;
+}
+
+.error-container-image.MuiGrid-item img {
+  width: 100%;
+}
