@@ -86,7 +86,7 @@ it('render right of initial page data after loading state', async () => {
     level: 1,
   })).toBeInTheDocument();
 
-  expect(screen.getByText(`Results: ${mockData.results.length}`)).toBeInTheDocument();
+  expect(screen.getByText(`Total: ${mockData.results.length}`)).toBeInTheDocument();
 
   const cardsRateUser = screen.getAllByTestId('card-rate-user');
   expect(cardsRateUser).toHaveLength(mockData.results.length);
@@ -123,10 +123,10 @@ it('Render the correct error page when there is any error other than 404', async
 
   await act(async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/rates`]}>
         <ThemeProvider theme={darkTheme}>
           <Routes>
-            <Route path="/" element={<UserRates />} />
+            <Route path="/user/:id/rates" element={<UserRates />} />
             <Route path="/error" element={<Error />} />
           </Routes>
         </ThemeProvider>
@@ -179,9 +179,6 @@ it('right handle of pagintation', async () => {
   const page = within(pageLayout).getByTestId('page-user-rates');
   expect(page).toBeInTheDocument();
 
-  // Only 1 result
-  expect(screen.getByText(`Results: ${pageOne.results.length}`)).toBeInTheDocument();
-
   // The button more is not disabled when there are more data
   expect(screen.getByRole('button', {
     name: /more/i,
@@ -203,9 +200,6 @@ it('right handle of pagintation', async () => {
       data: { ...pageTwo.results[0] },
     }, {});
   });
-
-  // At the end the result is incremented
-  expect(screen.getByText(`Results: ${pageOne.results.length + pageTwo.results.length}`)).toBeInTheDocument();
 
   const cardsRateUser = screen.getAllByTestId('card-rate-user');
   expect(cardsRateUser).toHaveLength(pageOne.results.length + pageTwo.results.length);

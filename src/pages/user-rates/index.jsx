@@ -12,6 +12,7 @@ import Loading from 'src/components/loading';
 import PageLayout from 'src/components/page-layout';
 import CardRateUser from 'src/components/card-rate-user';
 import helperFunctions from 'src/utils/helper-functions';
+import linkRoutes from 'src/utils/link-routes';
 
 export default function UserRates() {
   const { user } = useUserAuth();
@@ -38,7 +39,7 @@ export default function UserRates() {
         <Box className="page-container-button-user" data-testid="page-container-button-user">
           <Button
             component={Link}
-            to={`/user/${id}`}
+            to={linkRoutes.userProfile(id)}
             sx={{
               color: 'primary.light',
             }}
@@ -51,7 +52,7 @@ export default function UserRates() {
         <Typography sx={{ typography: { sm: 'h2', xs: 'h3' } }} component="h1" color="secondary.light" align="center">
           Rates
         </Typography>
-        <Typography variant="h5" component="h2">{`Results: ${data.results?.length}`}</Typography>
+        <Typography variant="h5" component="h2">{`Total: ${data?.total}`}</Typography>
         <Grid
           container
           sx={{

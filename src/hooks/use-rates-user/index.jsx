@@ -75,7 +75,7 @@ export default function useRatesUser({ id }) {
     return () => {
       mounted = false;
     };
-  }, [page, id, data.total_pages]);
+  }, [page, id]);
 
   return {
     data, loading, loadingNextPage, setPage, error,
