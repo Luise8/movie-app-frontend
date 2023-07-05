@@ -9,7 +9,7 @@ it('right render in document', () => {
   // Role of CircularProgress MUI component
   expect(screen.getByRole('progressbar')).toBeInTheDocument();
 
-  expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/Loading.../i)).toBeInTheDocument();
 });
 
 it('right classes', async () => {
@@ -18,5 +18,4 @@ it('right classes', async () => {
   });
 
   expect(screen.getByTestId(/loading-container/i)).toHaveClass('loading-container');
-  expect(screen.getByText(/Loading.../i)).toHaveClass('visually-hidden');
 });

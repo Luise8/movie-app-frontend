@@ -5,9 +5,7 @@ import 'src/components/loading/styles.css';
 function Loading() {
   return (
     <div className="loading-container" data-testid="loading-container">
-      <CircularProgress />
-      <span className="visually-hidden">Loading...</span>
-
+      <CircularProgress aria-label="loading..." />
     </div>
   );
 }

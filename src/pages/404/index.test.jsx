@@ -59,7 +59,7 @@ it('right render of loading state', () => {
       <PageNotFound />
     </MemoryRouter>,
   );
-  expect(screen.getByText(/loading.../i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/loading.../i)).toBeInTheDocument();
   expect(screen.queryByTestId('page-layout')).not.toBeInTheDocument();
 });
 

@@ -71,7 +71,7 @@ it('render right of initial page data after loading state', async () => {
   });
   expect(getReviewsUser).toBeCalled();
 
-  expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument();
+  expect(screen.queryByLabelText(/Loading.../i)).not.toBeInTheDocument();
 
   const pageLayout = screen.getByTestId('page-layout');
   expect(pageLayout).toBeInTheDocument();
@@ -116,7 +116,7 @@ it('Render right initial loading state', async () => {
     </MemoryRouter>,
   );
   await waitFor(() => {
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Loading.../i)).toBeInTheDocument();
   });
 });
 
@@ -138,7 +138,7 @@ it('Render the correct error page when there is any error other than 404', async
   });
   expect(getReviewsUser).toBeCalled();
 
-  expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument();
+  expect(screen.queryByLabelText(/Loading.../i)).not.toBeInTheDocument();
 
   expect(screen.queryByTestId(/page-review/i)).not.toBeInTheDocument();
 
