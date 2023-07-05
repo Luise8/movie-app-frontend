@@ -36,7 +36,7 @@ export default function UserReviews() {
 
   return (
     <PageLayout>
-      <Container className="page" data-testid="page-review">
+      <Container className="page" data-testid="page-user-reviews">
         <Box className="page-container-button-user" data-testid="page-container-button-user">
           <Button
             component={Link}

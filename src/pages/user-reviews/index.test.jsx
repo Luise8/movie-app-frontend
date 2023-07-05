@@ -76,7 +76,7 @@ it('render right of initial page data after loading state', async () => {
   const pageLayout = screen.getByTestId('page-layout');
   expect(pageLayout).toBeInTheDocument();
 
-  const page = within(pageLayout).getByTestId('page-review');
+  const page = within(pageLayout).getByTestId('page-user-reviews');
   expect(page).toBeInTheDocument();
 
   const LinkUserMatcher = `see profile of ${mockData.user_details.username}`;
@@ -140,7 +140,7 @@ it('Render the correct error page when there is any error other than 404', async
 
   expect(screen.queryByLabelText(/Loading.../i)).not.toBeInTheDocument();
 
-  expect(screen.queryByTestId(/page-review/i)).not.toBeInTheDocument();
+  expect(screen.queryByTestId(/page-user-reviews/i)).not.toBeInTheDocument();
 
   expect(screen.getByTestId(/^error-container$/i)).toBeInTheDocument();
 });
@@ -179,7 +179,7 @@ it('right handle of pagintation', async () => {
   const pageLayout = screen.getByTestId('page-layout');
   expect(pageLayout).toBeInTheDocument();
 
-  const page = within(pageLayout).getByTestId('page-review');
+  const page = within(pageLayout).getByTestId('page-user-reviews');
   expect(page).toBeInTheDocument();
 
   // Only 1 result
@@ -235,7 +235,7 @@ it('right classes and inline styles', async () => {
     );
   });
 
-  expect(screen.getByTestId('page-review')).toHaveClass('page');
+  expect(screen.getByTestId('page-user-reviews')).toHaveClass('page');
 
   expect(screen.getByTestId('page-container-button-user')).toHaveClass('page-container-button-user');
 
