@@ -27,7 +27,7 @@ const linkRoutes = {
     github: 'https://github.com/Luise8',
     linkedin: 'https://www.linkedin.com/in/luis-e-gamez-prado/',
   },
-
+  userProfile: (id) => `/user/${id}`,
 };
 
 export default linkRoutes;
