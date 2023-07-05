@@ -26,83 +26,83 @@ jest.mock('src/context/auth', () => ({
 
 test('full app rendering default page', async () => {
   renderWithRouter(<App />);
-  expect(screen.getByText(/home/i)).toBeInTheDocument();
+  expect(screen.getByTestId(/home/i)).toBeInTheDocument();
 });
 
 describe('landing on a existent pages', () => {
   it('user', () => {
     renderWithRouter(<App />, { route: '/user/123' });
-    expect(screen.getByText(/user/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/user/i)).toBeInTheDocument();
   });
 
   it('user-lists', () => {
     renderWithRouter(<App />, { route: '/user/123/lists' });
-    expect(screen.getByText(/lists/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/user-lists/i)).toBeInTheDocument();
   });
 
-  it('user-one-lists', () => {
+  it('user-one-list', () => {
     renderWithRouter(<App />, { route: '/user/123/lists/555' });
-    expect(screen.getByText(/list$|list /i)).toBeInTheDocument();
+    expect(screen.getByTestId(/user-one-list/i)).toBeInTheDocument();
   });
 
   it('user-rates', () => {
     renderWithRouter(<App />, { route: '/user/123/rates' });
-    expect(screen.getByText(/rates/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/user-rates/i)).toBeInTheDocument();
   });
 
   it('user-reviews', () => {
     renderWithRouter(<App />, { route: '/user/123/reviews' });
-    expect(screen.getByText(/reviews/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/user-reviews/i)).toBeInTheDocument();
   });
 
   it('user-watchlist', () => {
     renderWithRouter(<App />, { route: '/user/123/watchlist' });
-    expect(screen.getByText(/watchlist/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/user-watchlist/i)).toBeInTheDocument();
   });
 
   it('movie', () => {
     renderWithRouter(<App />, { route: '/movie/123' });
-    expect(screen.getByText(/movie/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/movie/i)).toBeInTheDocument();
   });
 
   it('movie-reviews', () => {
     renderWithRouter(<App />, { route: '/movie/123/reviews' });
-    expect(screen.getByText(/reviews/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/movie-reviews/i)).toBeInTheDocument();
   });
 
   it('movie-one-review', () => {
     renderWithRouter(<App />, { route: '/movie/123/reviews/999' });
-    expect(screen.getByText(/review$|review /i)).toBeInTheDocument();
+    expect(screen.getByTestId(/movie-one-review/i)).toBeInTheDocument();
   });
 
   it('user-edit-form', () => {
     renderWithRouter(<App />, { route: '/user-edit-form' });
-    expect(screen.getByText(/edit user/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/user-edit-form/i)).toBeInTheDocument();
   });
 
   it('review-form', () => {
     renderWithRouter(<App />, { route: '/review-form' });
-    expect(screen.getByText(/create review|edit review/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/review-form/i)).toBeInTheDocument();
   });
 
   it('rate-form', () => {
     renderWithRouter(<App />, { route: '/rate-form' });
-    expect(screen.getByText(/create rate|edit rate/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/rate-form/i)).toBeInTheDocument();
   });
 
   it('watchlist-form', () => {
     renderWithRouter(<App />, { route: '/watchlist-form' });
-    expect(screen.getByText(/edit watchlist/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/watchlist-form/i)).toBeInTheDocument();
   });
 
   it('list-create-form', () => {
     renderWithRouter(<App />, { route: '/list-create-form' });
-    expect(screen.getByText(/create list/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/list-create-form/i)).toBeInTheDocument();
   });
 
   it('list-edit-form', () => {
     renderWithRouter(<App />, { route: '/list-edit-form' });
-    expect(screen.getByText(/edit list/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/list-edit-form/i)).toBeInTheDocument();
   });
 
   it('registration', () => {
@@ -113,7 +113,7 @@ describe('landing on a existent pages', () => {
       logOutContext: jest.fn(),
     }));
     renderWithRouter(<App />, { route: '/registration' });
-    expect(screen.getByText(/registration/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/registration/i)).toBeInTheDocument();
   });
 
   it('login', () => {
@@ -124,7 +124,7 @@ describe('landing on a existent pages', () => {
       logOutContext: jest.fn(),
     }));
     renderWithRouter(<App />, { route: '/login' });
-    expect(screen.getByText(/login/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/login/i)).toBeInTheDocument();
   });
 
   it('signup', () => {
@@ -135,47 +135,52 @@ describe('landing on a existent pages', () => {
       logOutContext: jest.fn(),
     }));
     renderWithRouter(<App />, { route: '/signup' });
-    expect(screen.getByText(/signup/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/signup/i)).toBeInTheDocument();
   });
 
   it('latest', () => {
     renderWithRouter(<App />, { route: '/latest' });
-    expect(screen.getByText(/latest/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/latest/i)).toBeInTheDocument();
   });
 
   it('popular', () => {
     renderWithRouter(<App />, { route: '/popular' });
-    expect(screen.getByText(/popular/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/popular/i)).toBeInTheDocument();
   });
 
   it('trending', () => {
     renderWithRouter(<App />, { route: '/trending' });
-    expect(screen.getByText(/trending/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/trending/i)).toBeInTheDocument();
   });
 
   it('rated', () => {
     renderWithRouter(<App />, { route: '/rated' });
-    expect(screen.getByText(/rated/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/rated/i)).toBeInTheDocument();
   });
 
   it('genre', () => {
     renderWithRouter(<App />, { route: '/genre/28' });
-    expect(screen.getByText(/genre/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/genre/i)).toBeInTheDocument();
   });
 
   it('search', () => {
     renderWithRouter(<App />, { route: '/search/house' });
-    expect(screen.getByText(/search/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/search/i)).toBeInTheDocument();
   });
 
   it('credits', () => {
     renderWithRouter(<App />, { route: '/credits' });
-    expect(screen.getByText(/credits/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/credits/i)).toBeInTheDocument();
+  });
+
+  it('error', () => {
+    renderWithRouter(<App />, { route: '/error' });
+    expect(screen.getByTestId(/error/i)).toBeInTheDocument();
   });
 });
 
 test('landing on a bad page', () => {
   renderWithRouter(<App />, { route: '/something-that-does-not-match' });
 
-  expect(screen.getByText(/pagenotfound/i)).toBeInTheDocument();
+  expect(screen.getByTestId(/404/i)).toBeInTheDocument();
 });
