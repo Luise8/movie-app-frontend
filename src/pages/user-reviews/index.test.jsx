@@ -59,10 +59,10 @@ beforeEach(async () => {
 it('render right of initial page data after loading state', async () => {
   await act(async () => {
     render(
-      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}`]}>
+      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/reviews`]}>
         <ThemeProvider theme={darkTheme}>
           <Routes>
-            <Route path="/user/:id" element={<UserReviews />} />
+            <Route path="/user/:id/reviews" element={<UserReviews />} />
           </Routes>
         </ThemeProvider>
         ,
@@ -92,7 +92,7 @@ it('render right of initial page data after loading state', async () => {
     level: 1,
   })).toBeInTheDocument();
 
-  expect(screen.getByText(`Results: ${mockData.results.length}`)).toBeInTheDocument();
+  expect(screen.getByText(`Total: ${mockData.total}`)).toBeInTheDocument();
 
   // Call of ListGeneric with rith data and right renderItem component
   expect(ListGeneric.mock.calls[0][0]).toEqual({
@@ -125,10 +125,10 @@ it('Render the correct error page when there is any error other than 404', async
 
   await act(async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/reviews`]}>
         <ThemeProvider theme={darkTheme}>
           <Routes>
-            <Route path="/" element={<UserReviews />} />
+            <Route path="/user/:id/reviews" element={<UserReviews />} />
             <Route path="/error" element={<Error />} />
           </Routes>
         </ThemeProvider>
@@ -164,10 +164,10 @@ it('right handle of pagintation', async () => {
 
   await act(async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/reviews`]}>
         <ThemeProvider theme={darkTheme}>
           <Routes>
-            <Route path="/" element={<UserReviews />} />
+            <Route path="/user/:id/reviews" element={<UserReviews />} />
             <Route path="/error" element={<Error />} />
           </Routes>
         </ThemeProvider>
@@ -181,9 +181,6 @@ it('right handle of pagintation', async () => {
 
   const page = within(pageLayout).getByTestId('page-user-reviews');
   expect(page).toBeInTheDocument();
-
-  // Only 1 result
-  expect(screen.getByText(`Results: ${pageOne.results.length}`)).toBeInTheDocument();
 
   // The button more is not disabled when there are more data
   expect(screen.getByRole('button', {
@@ -212,9 +209,6 @@ it('right handle of pagintation', async () => {
     }, {});
   });
 
-  // At the end result incremented to 2
-  expect(screen.getByText(`Results: ${pageOne.results.length + pageTwo.results.length}`)).toBeInTheDocument();
-
   // The button more is disabled when there are not more data
   expect(screen.getByRole('button', {
     name: /more/i,
@@ -224,10 +218,10 @@ it('right handle of pagintation', async () => {
 it('right classes and inline styles', async () => {
   await act(async () => {
     render(
-      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}`]}>
+      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/reviews`]}>
         <ThemeProvider theme={darkTheme}>
           <Routes>
-            <Route path="/user/:id" element={<UserReviews />} />
+            <Route path="/user/:id/reviews" element={<UserReviews />} />
           </Routes>
         </ThemeProvider>
         ,

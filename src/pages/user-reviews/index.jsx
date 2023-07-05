@@ -53,7 +53,7 @@ export default function UserReviews() {
         <Typography sx={{ typography: { sm: 'h2', xs: 'h3' } }} component="h1" color="secondary.light">
           Reviews
         </Typography>
-        <Typography variant="h5" component="h2">{`Results: ${data.results?.length}`}</Typography>
+        <Typography variant="h5" component="h2">{`Total: ${data?.total}`}</Typography>
         <ListGeneric propKey="id" list={data.results} renderItem={CardReviewUser} />
         <Box className="page-container-button-more" data-testid="page-container-button-more">
           <LoadingButton
