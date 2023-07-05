@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PageNotFound from 'src/pages/404';
 import Credits from 'src/pages/credits';
@@ -28,6 +28,7 @@ import UserReviews from 'src/pages/user-reviews';
 import UserWatchlist from 'src/pages/user-watchlist';
 import WatchlistForm from 'src/pages/watchlist-form';
 import ProtectedRoute from 'src/components/protected-route';
+import Error from 'src/pages/error';
 
 export default function App() {
   return (
@@ -103,6 +104,7 @@ export default function App() {
           <Route path="/rated" element={<Rated />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/credits" element={<Credits />} />
+          <Route path="/error" element={<Error />} />
         </Routes>
       </div>
     </div>
