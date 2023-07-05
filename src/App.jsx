@@ -103,6 +103,7 @@ export default function App() {
           <Route path="/search/:query" element={<Search />} />
           <Route path="/rated" element={<Rated />} />
           <Route path="*" element={<PageNotFound />} />
+          <Route path="404" element={<PageNotFound />} />
           <Route path="/credits" element={<Credits />} />
           <Route path="/error" element={<Error />} />
         </Routes>
