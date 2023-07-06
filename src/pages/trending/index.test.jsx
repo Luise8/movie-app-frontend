@@ -133,12 +133,12 @@ it('right handle of pagintation', async () => {
 
   // Fist page
   const pageOne = {
-    ...mockData, page: 1, total: 2, page_zise: 1, next_page: 'next page url', results: [mockData.results[0]],
+    ...mockData, page: 1, total_results: 2, page_zise: 1, next_page: 'next page url', results: [mockData.results[0]],
   };
 
   // Second Page
   const pageTwo = {
-    ...mockData, page: 2, total: 2, page_zise: 1, prev_page: 'perv page url', next_page: '', results: [mockData.results[1]],
+    ...mockData, page: 2, total_results: 2, page_zise: 1, prev_page: 'perv page url', next_page: '', results: [mockData.results[1]],
   };
 
   // new max data
