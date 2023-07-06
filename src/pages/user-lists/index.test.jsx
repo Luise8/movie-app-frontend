@@ -207,6 +207,15 @@ it('right handle of pagintation', async () => {
 });
 
 it('right classes and inline styles', async () => {
+  // Change devolution of get data service
+  // to test class of button more when
+  // there are more resources
+  const notLastPage = {
+    ...mockData, next_page: 'next page url',
+  };
+  getListsUser
+    .mockImplementationOnce(() => Promise.resolve(notLastPage));
+
   await act(async () => {
     render(
       <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/lists`]}>
@@ -239,8 +248,8 @@ it('right classes and inline styles', async () => {
     level: 1,
   })).toHaveStyle(`color: ${darkTheme.palette.secondary.light}`);
 
-  // atribute of Button color secondary and variant outlined
+  // atribute of Button color secondary and variant contained
   expect(screen.getByRole('button', {
     name: /more/i,
-  })).toHaveClass('MuiButton-outlinedSecondary');
+  })).toHaveClass('MuiButton-containedSecondary');
 });
