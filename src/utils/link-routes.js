@@ -5,7 +5,7 @@ const linkRoutes = {
   cardRateUser: (id) => `/movie/${id}`,
   cardMovieMedium: (id) => `/movie/${id}`,
   cardMovieEditItem: (id) => `/movie/${id}`,
-  ListMovieItem: ({ userId, listId }) => `/user/${userId}/${listId}`,
+  ListMovieItem: ({ userId, listId }) => `/user/${userId}/lists/${listId}`,
   responsiveAppBar: {
     profile: (id) => `/user/${id}`,
     account: '/user-edit-form',
