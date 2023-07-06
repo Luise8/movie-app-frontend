@@ -32,7 +32,7 @@ export default function ListMovieLists({ list }) {
                       item
                       xs={12}
                     >
-                      {item.movies.length}
+                      {item?.movies?.length}
                       {' '}
                       movies
                     </Grid>
