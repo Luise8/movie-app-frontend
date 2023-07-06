@@ -142,7 +142,7 @@ const testDbHelpers = {
     page: 0,
     prev_page: '',
     next_page: '',
-    description: 'This is the description of list number 0made by the userNumber0 ',
+    description: 'This is the description of list number 0made by the userNumber0',
     listTotalIds: [
       '6450287ee765c993b6001231',
       '6450287ee765c993b6001235',
