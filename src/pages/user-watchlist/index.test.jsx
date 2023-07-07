@@ -289,6 +289,8 @@ it('right classes and inline styles', async () => {
 
   expect(screen.getByTestId('page-container-button-more')).toHaveClass('page-container-button-more');
 
+  expect(screen.getByTestId('page-watchlist-container-edit-button')).toHaveClass('page-watchlist-container-edit-button');
+
   const LinkUserMatcher = `see profile of ${mockData.user_details.username}`;
   const linkUser = screen.getByRole('link', {
     name: new RegExp(LinkUserMatcher, 'i'),
