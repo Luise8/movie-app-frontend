@@ -1,0 +1,10 @@
+.page-movie-reviews-movie-title.MuiTypography-root {
+  text-align: center;
+  text-decoration: none;
+}
+
+.page-movie-reviews-container-img.MuiBox-root {
+  width: 185px;
+  height: 278px;
+  background-color: #555;
+}

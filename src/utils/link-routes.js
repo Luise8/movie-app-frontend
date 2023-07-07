@@ -20,7 +20,7 @@ const linkRoutes = {
     query: (q) => `/search/${encodeURIComponent(q)}`,
   },
   movie: (id) => `movie/${id}`,
-  reviewsMovie: (id) => `movie/${id}/reviews`,
+  reviewsMovie: (id) => `/movie/${id}`,
   reviewOneMovie: (id) => `movie/${id}/reviews`,
   footer: {
     website: 'https://luisegamez.netlify.app/',
