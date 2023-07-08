@@ -29,7 +29,7 @@ const linkRoutes = {
   },
   userProfile: (id) => `/user/${id}`,
   listEditForm: ({ userId, listId }) => `/list-edit-form/${userId}/${listId}`,
-  watchlistForm: '/watchlist-form',
+  watchlist: '/watchlist-form',
 };
 
 export default linkRoutes;

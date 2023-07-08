@@ -64,7 +64,7 @@ export default function UserWatchlist() {
             <Grid item>
               <Button
                 component={Link}
-                to={linkRoutes.watchlistForm}
+                to={linkRoutes.watchlist}
                 variant="contained"
                 color="info"
                 endIcon={<HandymanSharpIcon />}

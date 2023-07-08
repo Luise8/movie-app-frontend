@@ -103,7 +103,7 @@ it('render right of initial page data after loading state of user loggedIn that 
     name: /edit list/i,
   });
   expect(editListLink).toBeInTheDocument();
-  expect(editListLink).toHaveAttribute('href', linkRoutes.watchlistForm);
+  expect(editListLink).toHaveAttribute('href', linkRoutes.watchlist);
 
   // Call of ListGeneric with right data and right renderItem component
   expect(ListGeneric).toHaveBeenLastCalledWith({
