@@ -15,7 +15,7 @@ function ProtectedRoute({ children }) {
   if (isObjectEmpty(user)) {
     return <Loading />;
   }
-  if (user?.username) {
+  if (user !== null) {
     return children;
   }
   return <Navigate to="/registration" />;
