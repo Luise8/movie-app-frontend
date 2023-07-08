@@ -15,13 +15,13 @@ export function UserAuthContextProvider({ children }) {
   }
 
   function getItem(key) {
-    const valueItem = localStorage.getItem(key);
+    const valueItem = JSON.parse(localStorage.getItem(key));
     return valueItem;
   }
 
-  function removeItem(key) {
+  const removeItem = useCallback((key) => {
     localStorage.removeItem(key);
-  }
+  }, []);
 
   const fetcAndSethUserData = useCallback(async (id) => {
     const userData = await getUser(id);
@@ -80,13 +80,13 @@ export function UserAuthContextProvider({ children }) {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [fetcAndSethUserData]);
 
   const value = useMemo(
     () => ({
-      user, fetcAndSethUserData, logInContext, logOutContext,
+      user, fetcAndSethUserData, logInContext, logOutContext, removeItem,
     }),
-    [user, fetcAndSethUserData, logInContext, logOutContext],
+    [user, fetcAndSethUserData, logInContext, logOutContext, removeItem],
   );
 
   return (
