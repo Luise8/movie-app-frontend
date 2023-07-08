@@ -1,0 +1,20 @@
+.page-watchlist-form-container-button-see-list.MuiBox-root {
+  display: flex;
+  justify-content: flex-start;
+  width: 1000px;
+  max-width: 95vw;
+}
+
+.page-watchlist-form-container-edit-buttons {
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.page-watchlist-form-alert.MuiAlert-root {
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+  width: 500px;
+  max-width: 95vw;
+}
