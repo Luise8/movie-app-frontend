@@ -30,6 +30,14 @@ export async function getWithToken(url) {
     const data = await response.json();
     return data;
   }
+
+  // To get error message when there is any
+  if (/application\/json/i.test(response.headers.get('content-type'))) {
+    const error = await response.json();
+    error.status = response.status;
+    throw error;
+  }
+
   const error = new Error(response);
   error.status = response.status;
   error.message = response.statusText;
@@ -64,6 +72,14 @@ export async function postWithToken({ url, body }) {
     const data = await response.json();
     return data;
   }
+
+  // To get error message when there is any
+  if (/application\/json/i.test(response.headers.get('content-type'))) {
+    const error = await response.json();
+    error.status = response.status;
+    throw error;
+  }
+
   const error = new Error(response);
   error.status = response.status;
   error.message = response.statusText;
@@ -97,6 +113,14 @@ export async function deleteWithToken(url) {
   if (response.ok) {
     return response;
   }
+
+  // To get error message when there is any
+  if (/application\/json/i.test(response.headers.get('content-type'))) {
+    const error = await response.json();
+    error.status = response.status;
+    throw error;
+  }
+
   const error = new Error(response);
   error.status = response.status;
   error.message = response.statusText;
@@ -143,6 +167,14 @@ export async function putWithToken({ url, body, multipart = false } = {}) {
     const data = await response.json();
     return data;
   }
+
+  // To get error message when there is any
+  if (/application\/json/i.test(response.headers.get('content-type'))) {
+    const error = await response.json();
+    error.status = response.status;
+    throw error;
+  }
+
   const error = new Error(response);
   error.status = response.status;
   error.message = response.statusText;
