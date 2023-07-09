@@ -130,7 +130,7 @@ export default function WatchlistForm() {
         <Grid container className="page-watchlist-form-container-edit-buttons" data-testid="page-watchlist-form-container-edit-buttons">
           <Grid item>
             <Button
-              color="inherit"
+              color="neutral"
               onClick={handleCancel}
               endIcon={<ReplayIcon />}
               variant="contained"
