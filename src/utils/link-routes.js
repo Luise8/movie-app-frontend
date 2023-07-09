@@ -28,7 +28,7 @@ const linkRoutes = {
     linkedin: 'https://www.linkedin.com/in/luis-e-gamez-prado/',
   },
   userProfile: (id) => `/user/${id}`,
-  listEditForm: ({ userId, listId }) => `/list-edit-form/${userId}/${listId}`,
+  oneListUser: ({ userId, listId }) => `/list-edit-form/${userId}/${listId}`,
   watchlist: '/watchlist-form',
   watchlistForm: (id) => `/user/${id}/watchlist`,
 };

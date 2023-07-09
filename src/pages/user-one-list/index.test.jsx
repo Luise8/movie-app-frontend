@@ -125,7 +125,7 @@ it('render right of initial page data after loading state with user loggedIn tha
     name: /edit list/i,
   });
   expect(editListLink).toBeInTheDocument();
-  expect(editListLink).toHaveAttribute('href', linkRoutes.listEditForm({ userId: mockCurrentUser.id, listId: mockData.id }));
+  expect(editListLink).toHaveAttribute('href', linkRoutes.oneListUser({ userId: mockCurrentUser.id, listId: mockData.id }));
 
   expect(screen.getByRole('button', {
     name: /delete list/i,

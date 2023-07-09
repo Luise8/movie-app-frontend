@@ -112,17 +112,6 @@ export default function UserOneList() {
           <Grid container className="page-user-one-list-container-edit-buttons" data-testid="page-user-one-list-container-edit-buttons">
             <Grid item>
               <Button
-                component={Link}
-                to={linkRoutes.listEditForm({ userId, listId })}
-                variant="contained"
-                color="info"
-                endIcon={<HandymanSharpIcon />}
-              >
-                Edit List
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
                 onClick={handleOpenModalConfirmation}
                 variant="contained"
                 color="error"
@@ -132,6 +121,17 @@ export default function UserOneList() {
                 endIcon={<HighlightOffSharpIcon />}
               >
                 Delete List
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                component={Link}
+                to={linkRoutes.oneListUser({ userId, listId })}
+                variant="contained"
+                color="info"
+                endIcon={<HandymanSharpIcon />}
+              >
+                Edit List
               </Button>
             </Grid>
           </Grid>
