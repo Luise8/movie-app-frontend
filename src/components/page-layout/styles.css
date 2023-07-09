@@ -41,3 +41,26 @@
 .page-container-button-more.MuiBox-root {
   padding: 7px;
 }
+
+.page-form.MuiBox-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 500px;
+  max-width: 90vw;
+}
+
+.page-form.MuiBox-root .MuiTextField-root,
+.MuiInputLabel-root,
+.MuiFilledInput-root,
+.MuiFormHelperText-root {
+  width: 100%;
+}
+
+.page-form-alert.MuiAlert-root {
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+  width: 500px;
+  max-width: 95vw;
+}
