@@ -26,7 +26,7 @@ export async function editList({
   }
   const body = {};
   if (name) body.name = name;
-  if (description) body.description = description;
+  if (typeof description === 'string') body.description = description;
   if (movies) body.movies = movies.slice();
   return putWithToken({ url: apiURLs.editList({ userId, listId }), body });
 }
