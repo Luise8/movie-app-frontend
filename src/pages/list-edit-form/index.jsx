@@ -95,12 +95,19 @@ export default function ListEditForm() {
         setIsUpdated(true);
         setIsLoadingSave(false);
       } catch (e) {
-        if (e.errors) {
-          const message = e.errors.map((err) => err.msg).join('\r\n');
-          e.message = message;
-        } else if (e.error) {
-          const message = e.error;
-          e.message = message;
+        if (e.status === 400) {
+          if (e.errors) {
+            const message = e.errors.map((err) => err.msg).join('\r\n');
+            e.message = message;
+          } else if (e.error) {
+            const message = e.error;
+            e.message = message;
+          }
+        // connection error
+        } else if (/can't access property "ready", window.grecaptcha is undefined/i.test(e.message) || !navigator.onLine) {
+          e.message = 'Something wrong. Check your connection.';
+        } else {
+          e.message = 'Something wrong. Please try again or try to refresh the page.';
         }
         setError(e);
         setIsLoadingSave(false);
@@ -161,7 +168,7 @@ export default function ListEditForm() {
     }
   }
 
-  if (initialError || (error && error?.status !== 400)) return <Navigate to="/error" />;
+  if (initialError) return <Navigate to="/error" />;
 
   return (
     <PageLayout>
