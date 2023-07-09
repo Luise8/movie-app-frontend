@@ -29,6 +29,7 @@ const linkRoutes = {
   },
   userProfile: (id) => `/user/${id}`,
   oneListUser: ({ userId, listId }) => `/list-edit-form/${userId}/${listId}`,
+  listEditForm: ({ userId, listId }) => `/user/${userId}/lists/${listId}`,
   watchlist: '/watchlist-form',
   watchlistForm: (id) => `/user/${id}/watchlist`,
 };
