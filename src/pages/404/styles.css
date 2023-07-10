@@ -17,6 +17,7 @@
   max-width: 200px;
   height: 200px;
   position: relative;
+  background-color: #555;
 }
 
 .e404-container-image.MuiGrid-item img {
