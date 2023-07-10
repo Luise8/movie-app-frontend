@@ -49,6 +49,7 @@
   gap: 15px;
   width: 500px;
   max-width: 90vw;
+  margin-top: 10px;
 }
 
 .page-form.MuiBox-root .MuiTextField-root,
