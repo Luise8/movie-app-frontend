@@ -10,4 +10,5 @@
 .page-user-one-list-container-edit-buttons {
   gap: 3px;
   justify-content: flex-end;
+  margin-bottom: 15px;
 }
