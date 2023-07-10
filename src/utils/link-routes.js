@@ -33,6 +33,7 @@ const linkRoutes = {
   listCreateForm: (userId) => `/user/${userId}/lists`,
   watchlist: '/watchlist-form',
   watchlistForm: (id) => `/user/${id}/watchlist`,
+  signUp: '/login',
 };
 
 export default linkRoutes;
