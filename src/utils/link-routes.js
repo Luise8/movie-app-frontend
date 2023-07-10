@@ -35,6 +35,10 @@ const linkRoutes = {
   watchlistForm: (id) => `/user/${id}/watchlist`,
   signUp: '/login',
   logIn: '/',
+  reviewForm: {
+    reviews: (id) => `/user/${id}/reviews`,
+    movie: (id) => `/movie/${id}`,
+  },
 };
 
 export default linkRoutes;

@@ -1,0 +1,14 @@
+.page-review-form-movie-title.MuiTypography-root {
+  text-align: center;
+  text-decoration: none;
+}
+
+.page-review-form-container-img.MuiBox-root {
+  width: 70px;
+  height: 105px;
+  background-color: #555;
+}
+
+.page-review-form-container-img.MuiBox-root img {
+  width: 100%;
+}
