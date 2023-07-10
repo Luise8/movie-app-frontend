@@ -34,6 +34,7 @@ const linkRoutes = {
   watchlist: '/watchlist-form',
   watchlistForm: (id) => `/user/${id}/watchlist`,
   signUp: '/login',
+  logIn: '/',
 };
 
 export default linkRoutes;
