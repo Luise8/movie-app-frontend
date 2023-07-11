@@ -5,13 +5,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {
   Box,
-  CardActionArea, CardHeader, Rating, Stack,
+  CardActionArea, CardHeader, Collapse, Rating, Stack,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import 'src/components/card-review-user/styles.css';
 import { Link } from 'react-router-dom';
 import linkRoutes from 'src/utils/link-routes';
 import appResourcesPath from 'src/utils/app-resources-path';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function CardReviewUser({
   data,
@@ -86,13 +87,38 @@ export default function CardReviewUser({
               {new Date(date).toUTCString()}
             </Typography>
           </Box>
-          <Typography
-            gutterBottom
-            variant="body1"
-            component="div"
+          <Collapse
+            timeout="auto"
+            collapsedSize="100px"
+            // Manual expand
+            onClick={(e) => {
+              if (e.currentTarget.style.height !== 'auto') {
+                e.currentTarget.style.height = 'auto'; // This expand
+                // The icon is svg. If you have more svg, you have to change this selector
+                const expandIcon = e.currentTarget.querySelector('svg');
+                expandIcon.style.display = 'none';
+              }
+            }}
           >
-            {body}
-          </Typography>
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              sx={{
+                whiteSpace: 'pre-wrap',
+              }}
+            >
+              {body}
+            </Typography>
+            <ExpandMoreIcon sx={{
+              position: 'absolute',
+              bottom: '30px',
+              right: '10px',
+              color: 'secondary',
+              cursor: 'pointer',
+            }}
+            />
+          </Collapse>
         </CardContent>
       </Box>
     </Card>

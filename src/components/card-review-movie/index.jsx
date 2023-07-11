@@ -3,12 +3,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {
-  CardActionArea, CardHeader, Grid,
+  CardActionArea, CardHeader, Collapse, Grid,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import 'src/components/card-review-movie/styles.css';
 import { Link } from 'react-router-dom';
 import linkRoutes from 'src/utils/link-routes';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function CardReviewMovie({
   data,
@@ -46,15 +47,40 @@ export default function CardReviewMovie({
         component="h2"
         className="card-review-movie-header"
       />
-      <CardContent data-testid="card-review-movie-card-content" className="card-review-movie-card-content">
-        <Typography
-          gutterBottom
-          variant="body1"
-          component="div"
-        >
-          {body}
-        </Typography>
-      </CardContent>
+      <Collapse
+        id="card-review-movie-collapse"
+        timeout="auto"
+        collapsedSize="100px"
+        className="MuiCollapse-entered"
+             // Manual expand
+        onClick={(e) => {
+          if (e.currentTarget.style.height !== 'auto') {
+            e.currentTarget.style.height = 'auto'; // This expand
+            // The icon is svg. If you have more svg, you have to change this selector
+            const expandIcon = e.currentTarget.querySelector('svg');
+            expandIcon.style.display = 'none';
+          }
+        }}
+      >
+        <CardContent data-testid="card-review-movie-card-content" className="card-review-movie-card-content">
+
+          <Typography
+            gutterBottom
+            variant="body1"
+            component="div"
+          >
+            {body}
+          </Typography>
+        </CardContent>
+        <ExpandMoreIcon sx={{
+          position: 'absolute',
+          bottom: '30px',
+          right: '10px',
+          color: 'secondary',
+          cursor: 'pointer',
+        }}
+        />
+      </Collapse>
     </Card>
   );
 }
