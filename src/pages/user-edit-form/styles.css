@@ -1,0 +1,29 @@
+.page-user-edit-form-movie-title.MuiTypography-root {
+  text-align: center;
+  text-decoration: none;
+}
+
+.page-user-edit-form-container-photo-field.MuiBox-root {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  flex-direction: column;
+}
+
+.page-user-edit-form-container-img-and-input.MuiBox-root {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+}
+
+.page-user-edit-form-container-img.MuiBox-root {
+  width: 70px;
+  height: 70px;
+  background-color: #555;
+}
+
+.page-user-edit-form-container-img.MuiBox-root img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
