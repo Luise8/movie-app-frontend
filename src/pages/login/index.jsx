@@ -84,6 +84,8 @@ export default function LogIn() {
             }
           }
         // connection error
+        } else if (e.status === 401) {
+          e.message = 'The username-password combination entered was not valid.';
         } else if (/can't access property "ready", window.grecaptcha is undefined/i.test(e.message) || !navigator.onLine) {
           e.message = 'Something wrong. Check your connection.';
         } else {
