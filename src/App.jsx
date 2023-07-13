@@ -46,7 +46,7 @@ export default function App() {
           <Route path="/movie/:id/reviews" element={<MovieReviews />} />
           <Route path="/movie/:movieId/reviews/:reviewId" element={<MovieOneReview />} />
           <Route
-            path="/review-form"
+            path="/review-form/:movieId"
             element={(
               <ProtectedRoute>
                 <ReviewForm />
@@ -54,7 +54,7 @@ export default function App() {
             )}
           />
           <Route
-            path="/rate-form"
+            path="/rate-form/:movieId"
             element={(
               <ProtectedRoute>
                 <RateForm />
@@ -70,7 +70,7 @@ export default function App() {
           )}
           />
           <Route
-            path="/list-edit-form"
+            path="/list-edit-form/:userId/:listId"
             element={(
               <ProtectedRoute>
                 <ListEditForm />
