@@ -39,6 +39,10 @@ const linkRoutes = {
     reviews: (id) => `/user/${id}/reviews`,
     movie: (id) => `/movie/${id}`,
   },
+  rateForm: {
+    rates: (id) => `/user/${id}/rates`,
+    movie: (id) => `/movie/${id}`,
+  },
   userEditForm: (userId) => `/user/${userId}`,
 };
 

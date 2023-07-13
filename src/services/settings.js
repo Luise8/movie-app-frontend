@@ -40,7 +40,7 @@ const apiURLs = {
   // Enconded query
   getMoviesBySearch: ({ page, query, isEncoded }) => (isEncoded ? `${baseApiURL}/movies/search?query=${query}&page=${page}` : `${baseApiURL}/movies/search?query=${encodeURIComponent(query)}&page=${page}`),
   getSpecificReviewUser: (id) => `${baseApiURL}/movies/${id}/reviewUser`,
-  getSpecificRateUser: (id) => `${baseApiURL}/movies/${id}/ratewUser`,
+  getSpecificRateUser: (id) => `${baseApiURL}/movies/${id}/rateUser`,
 
   // Reviews
   createReview: (id) => `${baseApiURL}/movies/${id}/reviews`,

@@ -2518,7 +2518,7 @@ const testDbHelpers = {
       id: '64493b16236a412ea5eb6550',
     },
   },
-  specificRatewUser: {
+  specificRateUser: {
     rate: {
       value: 5,
       date: '2023-06-16T18:06:45.959Z',

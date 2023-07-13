@@ -1,0 +1,24 @@
+.page-rate-form-movie-title.MuiTypography-root {
+  text-align: center;
+  text-decoration: none;
+}
+
+.page-rate-form-container-img.MuiBox-root {
+  width: 70px;
+  height: 105px;
+  background-color: #555;
+}
+
+.page-rate-form-container-img.MuiBox-root img {
+  width: 100%;
+}
+
+.page-rate-form-rating.MuiRating-root {
+  font-size: 3.2rem;
+}
+
+@media (max-width: 560px) {
+  .page-rate-form-rating.MuiRating-root {
+    font-size: 9vw;
+  }
+}
