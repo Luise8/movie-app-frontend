@@ -55,7 +55,9 @@
 .page-form.MuiBox-root .MuiTextField-root,
 .MuiInputLabel-root,
 .MuiFilledInput-root,
-.MuiFormHelperText-root {
+.MuiOutlinedInput-root,
+.MuiFormHelperText-root,
+.MuiFormControl-root {
   width: 100%;
 }
 
