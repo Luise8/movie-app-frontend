@@ -1725,7 +1725,7 @@ const testDbHelpers = {
     total_results: 264,
     query: 'mario',
   },
-  movieByGenre: {
+  moviesByGenre: {
     page_size: 20,
     prev_page: '',
     next_page: 'movies/genre?genres=28&page=2',
