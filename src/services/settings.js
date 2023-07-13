@@ -35,7 +35,7 @@ const apiURLs = {
   getLatestMovies: (page) => `${baseApiURL}/movies/latest?page=${page}`,
   getPopularMovies: (page) => `${baseApiURL}/movies/popular?page=${page}`,
   getTrendingMovies: (page) => `${baseApiURL}/movies/trending?page=${page}`,
-  getRatedMovies: (page) => `${baseApiURL}/movies/rated?page=${page}`,
+  getRatedMovies: (page) => `${baseApiURL}/movies/rated?page=${page}&pageSize=1`,
   getMoviesByGenre: ({ page, genres }) => `${baseApiURL}/movies/genre?genres=${genres}&page=${page}`,
   // Enconded query
   getMoviesBySearch: ({ page, query, isEncoded }) => (isEncoded ? `${baseApiURL}/movies/search?query=${query}&page=${page}` : `${baseApiURL}/movies/search?query=${encodeURIComponent(query)}&page=${page}`),
