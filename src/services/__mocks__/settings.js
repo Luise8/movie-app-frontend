@@ -18,6 +18,7 @@ const apiURLs = {
     userId, listId, page,
   }) => `${baseApiURL}/users/${userId}/lists/${listId}?page=${page}&pageSize=20`),
   getOneListUserLight: jest.fn(({ userId, listId }) => `${baseApiURL}/users/${userId}/lists/${listId}?light=true`),
+  getAllListUserLight: jest.fn((userId) => `${baseApiURL}/users/${userId}/all-lists-light`),
 
   // List
   createList: jest.fn((id) => `${baseApiURL}/users/${id}/lists`),

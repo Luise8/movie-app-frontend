@@ -18,6 +18,7 @@ const apiURLs = {
     userId, listId, page,
   }) => `${baseApiURL}/users/${userId}/lists/${listId}?page=${page}&pageSize=20`,
   getOneListUserLight: ({ userId, listId }) => `${baseApiURL}/users/${userId}/lists/${listId}?light=true`,
+  getAllListUserLight: (userId) => `${baseApiURL}/users/${userId}/all-lists-light`,
 
   // List
   createList: (id) => `${baseApiURL}/users/${id}/lists`,

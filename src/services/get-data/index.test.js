@@ -247,6 +247,36 @@ describe('getOneListUserLight', () => {
   });
 });
 
+describe('getAllListUserLight', () => {
+  const body = {
+    data: 'some data',
+  };
+  const userId = '123456789a8798asd7897d4a';
+
+  const urlRight = `${baseApiURL}/users/${userId}/all-lists-light`;
+  beforeAll(() => {
+    getWithToken.mockImplementation(() => Promise.resolve(body));
+  });
+
+  beforeEach(() => {
+    apiURLs.getAllListUserLight.mockClear();
+  });
+
+  it('called with valid arguments', async () => {
+    const data = await api.getAllListUserLight(userId);
+    expect(getWithToken).toHaveBeenCalledTimes(1);
+    expect(getWithToken).toHaveBeenCalledWith(urlRight);
+    expect(apiURLs.getAllListUserLight).toHaveBeenCalledWith(userId);
+    expect(data).toBe(body);
+  });
+
+  it('rejecting with error if some argument is invalid or missing', async () => {
+    await expect(api.getAllListUserLight(null)).rejects.toThrow();
+    expect(getWithToken).not.toHaveBeenCalled();
+    expect(apiURLs.getAllListUserLight).not.toHaveBeenCalled();
+  });
+});
+
 describe('getMovieDetail', () => {
   const body = {
     data: 'some data',

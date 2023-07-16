@@ -146,3 +146,10 @@ export async function getOneListUserLight({ userId, listId }) {
   }
   return getWithToken(apiURLs.getOneListUserLight({ userId, listId }));
 }
+
+export async function getAllListUserLight(userId) {
+  if (typeof userId !== 'string' || userId === '') {
+    throw new Error('wrong field');
+  }
+  return getWithToken(apiURLs.getAllListUserLight(userId));
+}
