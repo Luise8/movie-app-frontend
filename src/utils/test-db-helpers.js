@@ -240,6 +240,45 @@ const testDbHelpers = {
     ],
     id: '64502ae06dc338b6e80b8c55',
   },
+  allListsUserLight: {
+    user_details: {
+      username: 'userNumber0',
+      photo: null,
+      bio: '',
+      date: '2023-07-12T19:29:58.004Z',
+      lists: [
+        '64502ae06dc338b6e80b8c55',
+        '64502ae06dc338b6e80b8c58',
+      ],
+      watchlist: '64aeff3614c8f0a5bd0c5249',
+      id: '64501354c41b5db06e01c5a4',
+    },
+    results: [
+      {
+        id: '64502ae06dc338b6e80b8c55',
+        name: 'List number 0',
+        movies: [
+          '13804',
+          '77959',
+          '51497',
+        ],
+      },
+      {
+        id: '64502ae06dc338b6e80b8c58',
+        name: 'List number 3',
+        movies: [],
+      },
+      {
+        id: '64aeff3614c8f0a5bd0c5249',
+        name: 'Watchlist',
+        movies: [
+          '9799',
+          '467096',
+          '985445',
+        ],
+      },
+    ],
+  },
   watchlistUser: {
     user_details: {
       username: 'userNumber0',
