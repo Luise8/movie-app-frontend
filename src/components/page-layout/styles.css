@@ -67,3 +67,10 @@
   width: 500px;
   max-width: 95vw;
 }
+
+.section-header.MuiTypography-root {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+}
