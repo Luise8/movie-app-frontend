@@ -6,7 +6,7 @@ import 'src/components/list-movie-grid/styles.css';
 import CardMovieSmall from 'src/components/card-movie-small';
 import PropTypes from 'prop-types';
 
-export default function ListGridMovies({ list }) {
+export default function ListGridMovies({ list, wrap }) {
   return (
     <Grid
       container
@@ -14,6 +14,7 @@ export default function ListGridMovies({ list }) {
       spacing={2}
       justifyContent="center"
       alignItems="flex-start"
+      flexWrap={wrap}
     >
       {list.map((item) => (
         <Grid
@@ -31,4 +32,8 @@ export default function ListGridMovies({ list }) {
 
 ListGridMovies.propTypes = {
   list: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  wrap: PropTypes.string,
+};
+ListGridMovies.defaultProps = {
+  wrap: undefined,
 };
