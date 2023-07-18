@@ -90,6 +90,11 @@ export default function ModalAddMovieToList({
 
   useEffect(() => {
     let mounted = true;
+    if (!open) {
+      return () => {
+        mounted = false;
+      };
+    }
     async function fetchData() {
       try {
         const data = await getAllListUserLight(userId);
@@ -101,6 +106,7 @@ export default function ModalAddMovieToList({
       }
     }
     fetchData();
+
     return () => {
       mounted = false;
     };
