@@ -19,7 +19,13 @@ const linkRoutes = {
     movie: (id) => `/movie/${id}`,
     query: (q) => `/search/${encodeURIComponent(q)}`,
   },
-  movie: (id) => `movie/${id}`,
+  movie: {
+    genre: (genre) => `/genre/${genre}`,
+    reviews: (movieId) => `/movie/${movieId}/reviews`,
+    AddReview: (movieId) => `/review-form/${movieId}`,
+    AddRate: (movieId) => `/rate-form/${movieId}`,
+    registration: '/registration',
+  },
   reviewsMovie: (id) => `/movie/${id}`,
   reviewOneMovie: (id) => `movie/${id}/reviews`,
   footer: {
