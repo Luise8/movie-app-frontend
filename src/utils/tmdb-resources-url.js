@@ -19,6 +19,6 @@ export const images = {
 };
 
 export const videos = {
-  youtube: (key) => `https://www.youtube.com/watch?v=${key}`,
+  youtube: (key) => `https://www.youtube-nocookie.com/embed/${key}`,
   vimeo: (key) => `https://vimeo.com/${key}`,
 };
