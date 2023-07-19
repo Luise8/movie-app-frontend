@@ -19,6 +19,12 @@ const linkRoutes = {
     movie: (id) => `/movie/${id}`,
     query: (q) => `/search/${encodeURIComponent(q)}`,
   },
+  home: {
+    popular: '/popular',
+    trending: '/trending',
+    rated: '/rated',
+    latest: '/latest',
+  },
   movie: {
     genre: (genre) => `/genre/${genre}`,
     reviews: (movieId) => `/movie/${movieId}/reviews`,

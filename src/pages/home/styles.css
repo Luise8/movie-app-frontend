@@ -1,0 +1,109 @@
+.page-home.MuiContainer-root {
+  gap: 20px;
+}
+
+.page-home-header.MuiBox-root {
+  display: flex;
+  flex-grow: 1;
+  background-color: #333;
+  width: 1200px;
+  max-width: 100vw;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-home-carousel-header {
+  width: 100%;
+  z-index: 1;
+}
+
+.page-home-container-img-header.MuiBox-root {
+  overflow: hidden;
+  height: 600px;
+  position: relative;
+}
+
+.page-home-container-img-header.MuiBox-root img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
+.page-home-container-title-movie-header.MuiBox-root {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 2;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 13%,
+    rgba(255, 255, 255, 0) 48%
+  );
+}
+
+.page-home-cover-header.MuiBox-root {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-left: 20px;
+}
+
+.page-home-container-items {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .page-home-header.MuiBox-root {
+    height: 500px;
+  }
+  .page-home-container-img-header.MuiBox-root {
+    height: 500px;
+  }
+
+  .page-home-container-title-movie-header.MuiBox-root {
+    padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 750px) {
+  .page-home-header.MuiBox-root {
+    height: 450px;
+  }
+  .page-home-container-img-header.MuiBox-root {
+    height: 450px;
+  }
+}
+
+@media (max-width: 650px) {
+  .page-home-header.MuiBox-root {
+    height: 400px;
+  }
+  .page-home-container-img-header.MuiBox-root {
+    height: 400px;
+  }
+}
+
+@media (max-width: 360px) {
+  .page-home-header.MuiBox-root {
+    height: 300px;
+  }
+  .page-home-container-img-header.MuiBox-root {
+    height: 300px;
+  }
+}
