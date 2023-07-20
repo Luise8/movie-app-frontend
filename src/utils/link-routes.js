@@ -32,6 +32,13 @@ const linkRoutes = {
     AddRate: (movieId) => `/rate-form/${movieId}`,
     registration: '/registration',
   },
+  user: {
+    lists: (id) => `/user/${id}/lists`,
+    rates: (id) => `/user/${id}/rates`,
+    reviews: (id) => `/user/${id}/reviews`,
+    watchlist: (id) => `/user/${id}/watchlist`,
+    editUser: '/user-edit-form',
+  },
   reviewsMovie: (id) => `/movie/${id}`,
   reviewOneMovie: (id) => `movie/${id}/reviews`,
   footer: {

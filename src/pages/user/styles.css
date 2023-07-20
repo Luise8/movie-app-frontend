@@ -1,0 +1,57 @@
+.page-user {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  gap: 20px;
+}
+
+.page-user-container-photo-profile.MuiGrid-root {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.page-user-container-photo-profile img {
+  max-height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  background-color: #222;
+}
+
+.page-user-header-aside {
+  display: flex;
+  position: relative;
+  padding: 15px;
+}
+
+.page-user-header-aside a {
+  text-decoration: none;
+}
+
+.page-user-header-aside a:hover {
+  text-decoration: underline;
+}
+
+.page-user-container-rates.MuiGrid-root {
+  width: 1000px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1100px) {
+  .page-user-container-rates.MuiGrid-root {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 87vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .page-user-container-rates.MuiGrid-root {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}

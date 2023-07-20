@@ -1,0 +1,42 @@
+import { useEffect, useState } from 'react';
+import {
+  getUser,
+} from 'src/services/get-data';
+
+export default function useUser(id) {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(undefined);
+
+  useEffect(() => {
+    let mounted = true;
+    async function fetchData() {
+      try {
+        if (mounted) {
+          setLoading(true);
+        }
+        const dataFetched = await getUser(id);
+        if (mounted) {
+          setData(dataFetched);
+          setError(false);
+          setLoading(false);
+        }
+      } catch (e) {
+        if (mounted) {
+          setError(e);
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchData();
+
+    return () => {
+      mounted = false;
+    };
+  }, [id]);
+
+  return {
+    data, loading, error,
+  };
+}
