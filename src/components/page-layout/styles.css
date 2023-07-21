@@ -75,3 +75,7 @@
   display: flex;
   text-decoration: none;
 }
+
+.total-results-margin.MuiTypography-root {
+  margin-bottom: 20px;
+}
