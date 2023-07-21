@@ -1,14 +1,11 @@
 import { LoadingButton } from '@mui/lab';
 import {
-  Box, Button, Container, Typography,
+  Box, Button, Container, Grid, Typography,
 } from '@mui/material';
 import React, { useMemo } from 'react';
 import AddCircleOutlineSharpIcon from '@mui/icons-material/AddCircleOutlineSharp';
-import useReviewsUser from 'src/hooks/use-reviews-user';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import throttle from 'just-throttle';
-import ListGeneric from 'src/components/list-generic';
-import CardReviewUser from 'src/components/card-review-user';
 import { useUserAuth } from 'src/context/auth';
 import Loading from 'src/components/loading';
 import PageLayout from 'src/components/page-layout';
@@ -55,7 +52,23 @@ export default function UserLists() {
         <Typography sx={{ typography: { sm: 'h2', xs: 'h3' } }} component="h1" color="secondary.light">
           Lists
         </Typography>
-        <Typography variant="h5" component="h2">{`Total: ${data?.total}`}</Typography>
+        <Typography className="total-results-margin" data-testid="total-results-margin" variant="h5" component="h2">{`Total: ${data?.total}`}</Typography>
+        {id === user?.id
+          && (
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Button
+                component={Link}
+                to={linkRoutes.userLists}
+                variant="contained"
+                color="primary"
+                endIcon={<AddCircleOutlineSharpIcon />}
+              >
+                Create List
+              </Button>
+            </Grid>
+          </Grid>
+          )}
         <ListMovieLists list={data.results} />
         <Box className="page-container-button-more" data-testid="page-container-button-more">
           <LoadingButton

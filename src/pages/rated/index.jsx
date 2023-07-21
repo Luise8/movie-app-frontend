@@ -37,7 +37,7 @@ export default function Rated() {
         <Typography sx={{ typography: { sm: 'h2', xs: 'h3' } }} component="h1" color="secondary.light" textAlign="center">
           Rated Movies
         </Typography>
-        <Typography variant="h5" component="h2">{`Total: ${data?.total_results}`}</Typography>
+        <Typography className="total-results-margin" data-testid="total-results-margin" variant="h5" component="h2">{`Total: ${data?.total_results}`}</Typography>
         <ListGridMovies list={data.results} />
         <Box className="page-container-button-more" data-testid="page-container-button-more">
           <LoadingButton

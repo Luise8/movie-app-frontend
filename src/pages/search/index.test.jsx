@@ -240,6 +240,8 @@ it('right classes and inline styles', async () => {
   const queryMatcher = `query: "${queryToTestDecoded}"`;
   expect(screen.getByText(new RegExp(queryMatcher, 'i'))).toHaveStyle(`color: ${darkTheme.palette.primary.light}`);
 
+  expect(screen.getByTestId('total-results-margin')).toHaveClass('total-results-margin');
+
   // atribute of Button color secondary and variant contained
   expect(screen.getByRole('button', {
     name: /more/i,

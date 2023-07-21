@@ -266,6 +266,8 @@ it('right classes and inline styles', async () => {
 
   expect(screen.getByTestId('page-movie-reviews-container-img')).toHaveClass('page-movie-reviews-container-img');
 
+  expect(screen.getByTestId('total-results-margin')).toHaveClass('total-results-margin');
+
   // atribute of Button color secondary and variant contained
   expect(screen.getByRole('button', {
     name: /more/i,

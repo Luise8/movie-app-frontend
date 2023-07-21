@@ -45,7 +45,15 @@ export default function Genre() {
         <Typography sx={{ typography: { sm: 'h2', xs: 'h3' } }} component="h1" color="secondary.light" textAlign="center">
           Movies by genre
         </Typography>
-        <Typography variant="h5" component="h2">{`Total: ${data?.total_results}`}</Typography>
+        <Typography
+          className="total-results-margin"
+          data-testid="total-results-margin"
+          variant="h5"
+          component="h2"
+        >
+          {`Total: ${data?.total_results}`}
+
+        </Typography>
         <Typography color="primary.light" variant="body1" component="p">
           Genres:
           {' '}

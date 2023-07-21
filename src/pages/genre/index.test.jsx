@@ -236,6 +236,8 @@ it('right classes and inline styles', async () => {
     level: 1,
   })).toHaveStyle(`color: ${darkTheme.palette.secondary.light}`);
 
+  expect(screen.getByTestId('total-results-margin')).toHaveClass('total-results-margin');
+
   const genresMatcher = `genres: ${genresToTestNames}`;
   expect(screen.getByText(new RegExp(genresMatcher, 'i'))).toHaveStyle(`color: ${darkTheme.palette.primary.light}`);
 

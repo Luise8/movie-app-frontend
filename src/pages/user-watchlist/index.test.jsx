@@ -310,6 +310,8 @@ it('right classes and inline styles', async () => {
 
   expect(editListLink).toHaveStyle(`background-color: ${darkTheme.palette.info.main}`);
 
+  expect(screen.getByTestId('total-results-margin')).toHaveClass('total-results-margin');
+
   // atribute of Button color secondary and variant contained
   expect(screen.getByRole('button', {
     name: /more/i,
