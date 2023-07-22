@@ -149,6 +149,10 @@ it('render right initial page of user with full information, after loading state
   })).toHaveAttribute('href', linkRoutes.user.watchlist(mockUserProfile.id));
 
   expect(within(asideHeader).getByRole('link', {
+    name: /create list/i,
+  })).toHaveAttribute('href', linkRoutes.user.createList);
+
+  expect(within(asideHeader).getByRole('link', {
     name: /edit profile/i,
   })).toHaveAttribute('href', linkRoutes.user.editUser);
 
@@ -226,6 +230,10 @@ it('render right initial page of user with full information, after loading state
 
   expect(within(asideHeader).queryByRole('link', {
     name: /edit profile/i,
+  })).not.toBeInTheDocument();
+
+  expect(within(asideHeader).queryByRole('link', {
+    name: /create list/i,
   })).not.toBeInTheDocument();
 });
 
@@ -358,6 +366,9 @@ it('right classes and inline styles', async () => {
   })).toHaveStyle(`color: ${darkTheme.palette.primary.light}`);
   expect(within(headerAside).getByRole('link', {
     name: /edit profile/i,
+  })).toHaveStyle(`color: ${darkTheme.palette.primary.light}`);
+  expect(within(headerAside).getByRole('link', {
+    name: /create list/i,
   })).toHaveStyle(`color: ${darkTheme.palette.primary.light}`);
   expect(within(headerAside).getByRole('link', {
     name: /reviews/i,

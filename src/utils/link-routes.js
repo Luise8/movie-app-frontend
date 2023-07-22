@@ -44,6 +44,7 @@ const linkRoutes = {
     reviews: (id) => `/user/${id}/reviews`,
     watchlist: (id) => `/user/${id}/watchlist`,
     editUser: '/user-edit-form',
+    createList: '/list-create-form',
   },
   reviewsMovie: (id) => `/movie/${id}`,
   reviewOneMovie: (id) => `movie/${id}/reviews`,

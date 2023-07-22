@@ -131,6 +131,17 @@ export default function User() {
               <Grid
                 item
                 component={Link}
+                to={linkRoutes.user.createList}
+                color="primary.light"
+              >
+                Create List
+              </Grid>
+              )}
+            {user && user.id === id
+              && (
+              <Grid
+                item
+                component={Link}
                 to={linkRoutes.user.watchlist(id)}
                 color="primary.light"
               >
