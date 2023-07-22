@@ -71,6 +71,10 @@ const linkRoutes = {
   },
   userEditForm: (userId) => `/user/${userId}`,
   userLists: '/list-create-form',
+  registration: {
+    signUp: '/signup',
+    logIn: '/login',
+  },
 };
 
 export default linkRoutes;
