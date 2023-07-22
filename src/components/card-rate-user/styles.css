@@ -37,6 +37,15 @@
   gap: 5px;
 }
 
+.card-rate-user-container-edit-buttons.MuiBox-root {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 @media (max-width: 850px) {
   .card-rate-user-rating-row-container.MuiBox-root {
     flex-direction: column;

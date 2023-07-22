@@ -3,7 +3,7 @@ import {
   getRatesUser,
 } from 'src/services/get-data';
 
-export default function useRatesUser({ id }) {
+export default function useRatesUser({ id, modalDeleted }) {
   const INITIALPAGE = 0;
   const [data, setData] = useState({});
   const [page, setPage] = useState(INITIALPAGE);
@@ -38,6 +38,36 @@ export default function useRatesUser({ id }) {
       mounted = false;
     };
   }, [id]);
+
+  useEffect(() => {
+    let mounted = true;
+    async function fetchData() {
+      try {
+        if (!modalDeleted) {
+          return;
+        }
+        const dataFetched = await getRatesUser({ page: INITIALPAGE, id });
+        if (mounted) {
+          setData(dataFetched);
+          setPage(INITIALPAGE);
+          setError(false);
+          setLoading(false);
+        }
+      } catch (e) {
+        if (mounted) {
+          setError(e);
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchData();
+
+    return () => {
+      mounted = false;
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalDeleted]);
 
   useEffect(() => {
     let mounted = true;
@@ -78,6 +108,6 @@ export default function useRatesUser({ id }) {
   }, [page, id]);
 
   return {
-    data, loading, loadingNextPage, setPage, error,
+    data, loading, loadingNextPage, setPage, error, setData, setError, setLoading,
   };
 }

@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import linkRoutes from 'src/utils/link-routes';
+import userEvent from '@testing-library/user-event';
 import appResourcesPath from 'src/utils/app-resources-path';
 import testDbHelpers from 'src/utils/test-db-helpers';
 import { ThemeProvider } from '@emotion/react';
@@ -10,12 +11,12 @@ import darkTheme from 'src/utils/darkTheme';
 import testHelperFunctions from 'src/utils/test-helper-functions';
 import CardRateUser from 'src/components/card-rate-user';
 
-it('right render with image provided', () => {
+it('right render with image and handleDelete provided', () => {
   const rate = testDbHelpers.ratesUser.results[0];
-
+  const handleDelete = jest.fn();
   render(
     <MemoryRouter>
-      <CardRateUser data={rate} />
+      <CardRateUser data={{ ...rate, handleDelete }} />
     </MemoryRouter>,
   );
 
@@ -62,12 +63,20 @@ it('right render with image provided', () => {
 
   expect(screen.getByText(new RegExp(rate.movieId.description, 'i'))).toBeInTheDocument();
 
-  expect(screen.getByTestId('card-rate-user-container-image')).toHaveAttribute('href', linkRoutes.cardRateUser(rate.movieId.idTMDB));
+  expect(screen.getByTestId('card-rate-user-container-image')).toHaveAttribute('href', linkRoutes.cardRateUser.movie(rate.movieId.idTMDB));
 
-  expect(screen.getByTestId('link-title')).toHaveAttribute('href', linkRoutes.cardRateUser(rate.movieId.idTMDB));
+  expect(screen.getByTestId('link-title')).toHaveAttribute('href', linkRoutes.cardRateUser.movie(rate.movieId.idTMDB));
+
+  expect(screen.getByRole('button', {
+    name: /delete rate/i,
+  })).toBeInTheDocument();
+
+  expect(screen.getByRole('link', {
+    name: /update rate/i,
+  })).toHaveAttribute('href', linkRoutes.cardRateUser.editRate(rate.movieId.idTMDB));
 });
 
-it('right render without image provided', () => {
+it('right render without image or handleDelete provided', () => {
   const rate = testDbHelpers.ratesUser.results[0];
 
   render(
@@ -125,17 +134,44 @@ it('right render without image provided', () => {
 
   expect(screen.getByText(new RegExp(rate.movieId.description, 'i'))).toBeInTheDocument();
 
-  expect(screen.getByTestId('card-rate-user-container-image')).toHaveAttribute('href', linkRoutes.cardRateUser(rate.movieId.idTMDB));
+  expect(screen.getByTestId('card-rate-user-container-image')).toHaveAttribute('href', linkRoutes.cardRateUser.movie(rate.movieId.idTMDB));
 
-  expect(screen.getByTestId('link-title')).toHaveAttribute('href', linkRoutes.cardRateUser(rate.movieId.idTMDB));
+  expect(screen.getByTestId('link-title')).toHaveAttribute('href', linkRoutes.cardRateUser.movie(rate.movieId.idTMDB));
+
+  expect(screen.queryByRole('button', {
+    name: /delete rate/i,
+  })).not.toBeInTheDocument();
+
+  expect(screen.queryByRole('link', {
+    name: /update rate/i,
+  })).not.toBeInTheDocument();
+});
+
+it('right call of handleDelete when delete rate button is pressed', async () => {
+  const rate = testDbHelpers.ratesUser.results[0];
+  const handleDelete = jest.fn();
+  render(
+    <MemoryRouter>
+      <CardRateUser data={{ ...rate, handleDelete }} />
+    </MemoryRouter>,
+  );
+
+  const user = userEvent.setup();
+
+  await user.click(screen.getByRole('button', {
+    name: /delete rate/i,
+  }));
+
+  expect(handleDelete).toHaveBeenCalledTimes(1);
 });
 
 it('right classes and inline styles', () => {
   const rate = testDbHelpers.ratesUser.results[0];
+  const handleDelete = jest.fn();
   render(
     <MemoryRouter>
       <ThemeProvider theme={darkTheme}>
-        <CardRateUser data={rate} />
+        <CardRateUser data={{ ...rate, handleDelete }} />
       </ThemeProvider>
     </MemoryRouter>,
   );
@@ -173,4 +209,6 @@ it('right classes and inline styles', () => {
   const primaryColor = testHelperFunctions
     .colorConversion.hexStringToRgb(darkTheme.palette.primary.main);
   expect(h2).toHaveStyle(`color: ${primaryColor}`);
+
+  expect(screen.getByTestId('card-rate-user-container-edit-buttons')).toHaveClass('card-rate-user-container-edit-buttons');
 });

@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {
   Box,
-  CardActionArea, CardHeader, Rating, Stack, useTheme,
+  CardActionArea, CardHeader, IconButton, Rating, Stack, useTheme,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import 'src/components/card-rate-user/styles.css';
@@ -13,12 +13,14 @@ import { Link } from 'react-router-dom';
 import linkRoutes from 'src/utils/link-routes';
 import appResourcesPath from 'src/utils/app-resources-path';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import HandymanSharpIcon from '@mui/icons-material/HandymanSharp';
+import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp';
 
 export default function CardRateUser({
   data,
 }) {
   const {
-    value, date, movieId,
+    value, date, movieId, handleDelete, id,
   } = data;
   const releaseDate = movieId.release_date && typeof movieId.release_date === 'string' ? ` (${movieId.release_date.slice(0, 4)})` : '';
   const theme = useTheme();
@@ -32,7 +34,7 @@ export default function CardRateUser({
         data-testid="card-rate-user-container-image"
         className="card-rate-user-container-image"
         component={Link}
-        to={linkRoutes.cardRateUser(movieId.idTMDB)}
+        to={linkRoutes.cardRateUser.movie(movieId.idTMDB)}
       >
         <CardMedia
           className="card-rate-user-card-media"
@@ -45,13 +47,20 @@ export default function CardRateUser({
         <CardActionArea
           data-testid="link-title"
           component={Link}
-          to={linkRoutes.cardRateUser(movieId.idTMDB)}
+          to={linkRoutes.cardRateUser.movie(movieId.idTMDB)}
+          sx={{
+            width: {
+              xs: '95%',
+            },
+          }}
         >
           <CardHeader
-            title={`${movieId.name}${releaseDate}`}
+            title={(`${movieId.name}${releaseDate}`)}
             component="h2"
             className="card-rate-user-title-1"
-            sx={{ color: 'primary.main' }}
+            sx={{
+              color: 'primary.main',
+            }}
           />
         </CardActionArea>
         <CardContent>
@@ -128,6 +137,35 @@ export default function CardRateUser({
           </Typography>
         </CardContent>
       </Box>
+      {handleDelete && (
+      <Box
+        className="card-rate-user-container-edit-buttons"
+        data-testid="card-rate-user-container-edit-buttons"
+      >
+        <IconButton
+          component={Link}
+          to={linkRoutes.cardRateUser.editRate(movieId.idTMDB)}
+          size="small"
+          variant="contained"
+          aria-label="update rate"
+          color="info"
+        >
+          <HandymanSharpIcon />
+        </IconButton>
+        <IconButton
+          onClick={() => handleDelete({
+            movieId: movieId.idTMDB, rateId: id,
+          })}
+          size="small"
+          variant="contained"
+          aria-label="delete rate"
+          color="error"
+        >
+          <HighlightOffSharpIcon />
+        </IconButton>
+
+      </Box>
+      )}
     </Card>
   );
 }
@@ -137,6 +175,8 @@ CardRateUser.propTypes = {
     value: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
+    handleDelete: PropTypes.func,
+    id: PropTypes.string.isRequired,
     movieId: PropTypes.shape({
       name: PropTypes.string.isRequired,
       photo: PropTypes.string,

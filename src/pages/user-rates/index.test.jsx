@@ -13,10 +13,21 @@ import Error from 'src/pages/error';
 import linkRoutes from 'src/utils/link-routes';
 import UserRates from 'src/pages/user-rates';
 import CardRateUser from 'src/components/card-rate-user';
+import { deleteRate } from 'src/services/rate-write';
+import ModalConfirmation from 'src/components/modal-confirmation';
+import ModalNotification from 'src/components/modal-notification';
 
-const mockCurrentUser = {
-  id: '123',
-  username: 'userNumber1',
+const mockData = testDbHelpers.ratesUser;
+// mock get data service
+jest.mock('src/services/get-data', () => ({
+  getRatesUser: jest.fn(() => (Promise.resolve(mockData))),
+}));
+
+let mockCurrentUser;
+
+mockCurrentUser = {
+  id: mockData.user_details.id,
+  username: mockData.user_details.username,
 };
 // mock useUserAuth
 jest.mock('src/context/auth', () => ({
@@ -25,17 +36,14 @@ jest.mock('src/context/auth', () => ({
   })),
 }));
 
-const mockData = testDbHelpers.ratesUser;
-// mock get data service
-jest.mock('src/services/get-data', () => ({
-  getRatesUser: jest.fn(() => (Promise.resolve(mockData))),
+// mock write data service
+jest.mock('src/services/rate-write', () => ({
+  deleteRate: jest.fn(() => (Promise.resolve('deleted'))),
 }));
 
 // Mock Item
-jest.mock('src/components/card-rate-user', () => ({
-  __esModule: true,
-  default: jest.fn(() => <div data-testid="card-rate-user" />),
-}));
+jest.mock('src/components/card-rate-user');
+CardRateUser.mockImplementation(jest.requireActual('src/components/card-rate-user').default);
 
 // Mock PageLayout
 jest.mock('src/components/page-layout', () => ({
@@ -43,13 +51,26 @@ jest.mock('src/components/page-layout', () => ({
   default: jest.fn(({ children }) => <div data-testid="page-layout">{children}</div>),
 }));
 
+// Mock modals
+jest.mock('src/components/modal-confirmation');
+ModalConfirmation.mockImplementation(jest.requireActual('src/components/modal-confirmation').default);
+jest.mock('src/components/modal-notification');
+ModalNotification.mockImplementation(jest.requireActual('src/components/modal-notification').default);
+
 // Clear mocks
 beforeEach(async () => {
   getRatesUser.mockClear();
+  deleteRate.mockClear();
   CardRateUser.mockClear();
+  ModalConfirmation.mockClear();
+  ModalNotification.mockClear();
+  mockCurrentUser = {
+    id: mockData.user_details.id,
+    username: mockData.user_details.username,
+  };
 });
 
-it('render right of initial page data after loading state', async () => {
+it('render right of initial page data after loading state with user logged in that is the owner of the resources', async () => {
   await act(async () => {
     render(
       <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/rates`]}>
@@ -92,16 +113,47 @@ it('render right of initial page data after loading state', async () => {
   expect(cardsRateUser).toHaveLength(mockData.results.length);
 
   expect(CardRateUser).toHaveBeenCalledWith({
-    data: { ...mockData.results[0] },
+    data: { ...mockData.results[0], handleDelete: expect.any(Function) },
   }, {});
 
   expect(CardRateUser).toHaveBeenLastCalledWith({
-    data: { ...mockData.results[1] },
+    data: { ...mockData.results[1], handleDelete: expect.any(Function) },
   }, {});
 
   expect(screen.getByRole('button', {
     name: /more/i,
   })).toBeInTheDocument();
+});
+
+it('render right of initial page data after loading state with user not logged in', async () => {
+  mockCurrentUser = null;
+  await act(async () => {
+    render(
+      <MemoryRouter initialEntries={[`/user/${mockData.user_details.id}/rates`]}>
+        <ThemeProvider theme={darkTheme}>
+          <Routes>
+            <Route path="/user/:id/rates" element={<UserRates />} />
+          </Routes>
+        </ThemeProvider>
+        ,
+      </MemoryRouter>,
+    );
+  });
+  expect(getRatesUser).toBeCalled();
+
+  expect(screen.queryByLabelText(/Loading.../i)).not.toBeInTheDocument();
+
+  const pageLayout = screen.getByTestId('page-layout');
+  expect(pageLayout).toBeInTheDocument();
+
+  // Only change the calls of CardRateUser
+  expect(CardRateUser).toHaveBeenCalledWith({
+    data: { ...mockData.results[0], handleDelete: undefined },
+  }, {});
+
+  expect(CardRateUser).toHaveBeenLastCalledWith({
+    data: { ...mockData.results[1], handleDelete: undefined },
+  }, {});
 });
 
 it('Render right initial loading state', async () => {
@@ -185,7 +237,7 @@ it('right handle of pagintation', async () => {
   })).not.toHaveAttribute('disabled');
 
   expect(CardRateUser).toHaveBeenCalledWith({
-    data: { ...pageOne.results[0] },
+    data: { ...pageOne.results[0], handleDelete: expect.any(Function) },
   }, {});
 
   const user = userEvent.setup();
@@ -197,7 +249,7 @@ it('right handle of pagintation', async () => {
 
   await waitFor(() => {
     expect(CardRateUser).toHaveBeenLastCalledWith({
-      data: { ...pageTwo.results[0] },
+      data: { ...pageTwo.results[0], handleDelete: expect.any(Function) },
     }, {});
   });
 
@@ -208,6 +260,110 @@ it('right handle of pagintation', async () => {
   expect(screen.getByRole('button', {
     name: /more/i,
   })).toHaveAttribute('disabled');
+});
+
+it('right handleCancel of deletion of resource with user logged in that is the owner of the resources', async () => {
+  await act(async () => {
+    render(
+      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/rates`]}>
+        <ThemeProvider theme={darkTheme}>
+          <Routes>
+            <Route path="/user/:id/rates" element={<UserRates />} />
+          </Routes>
+        </ThemeProvider>
+        ,
+      </MemoryRouter>,
+    );
+  });
+  expect(getRatesUser).toBeCalled();
+
+  expect(screen.queryByLabelText(/Loading.../i)).not.toBeInTheDocument();
+
+  // The modals are not in the document
+  expect(screen.queryByTestId('confirm-dialog')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('notification-dialog')).not.toBeInTheDocument();
+
+  const user = userEvent.setup();
+
+  const deleteButtons = screen.getAllByRole('button', {
+    name: /delete rate/i,
+  });
+
+  // Right initial number of rates
+  expect(deleteButtons).toHaveLength(mockData.total);
+
+  await user.click(deleteButtons[0]);
+
+  await waitFor(() => {
+    expect(screen.getByTestId('confirm-dialog')).toBeInTheDocument();
+  });
+
+  await user.click(screen.getByRole('button', {
+    name: /cancel/i,
+  }));
+
+  // The modal was hidden
+  await waitFor(() => {
+    expect(screen.queryByTestId('confirm-dialog')).not.toBeInTheDocument();
+  });
+
+  // No resource was removed.
+  expect(screen.getAllByTestId('card-rate-user')).toHaveLength(mockData.total);
+});
+
+it('right handleConfirm of deletion of resource with user logged in that is the owner of the resources', async () => {
+  await act(async () => {
+    render(
+      <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/rates`]}>
+        <ThemeProvider theme={darkTheme}>
+          <Routes>
+            <Route path="/user/:id/rates" element={<UserRates />} />
+          </Routes>
+        </ThemeProvider>
+        ,
+      </MemoryRouter>,
+    );
+  });
+  expect(getRatesUser).toBeCalled();
+
+  expect(screen.queryByLabelText(/Loading.../i)).not.toBeInTheDocument();
+
+  // The modals are not in the document
+  expect(screen.queryByTestId('confirm-dialog')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('notification-dialog')).not.toBeInTheDocument();
+
+  const user = userEvent.setup();
+
+  const deleteButtons = screen.getAllByRole('button', {
+    name: /delete rate/i,
+  });
+
+  // Right initial number of rates
+  expect(deleteButtons).toHaveLength(mockData.total);
+
+  // delete first rate -- mockData.results[0]
+  await user.click(deleteButtons[0]);
+
+  await waitFor(() => {
+    expect(screen.getByTestId('confirm-dialog')).toBeInTheDocument();
+  });
+
+  await user.click(screen.getByRole('button', {
+    name: /Accept/i,
+  }));
+
+  // The modal copnfirm is not in the document and the modal notifications if in the document
+  await waitFor(() => {
+    expect(screen.queryByTestId('confirm-dialog')).not.toBeInTheDocument();
+    expect(screen.getByTestId('notification-dialog')).toBeInTheDocument();
+  });
+
+  // The resource was deleted
+  expect(deleteRate).toHaveBeenCalledTimes(1);
+  expect(deleteRate).toHaveBeenCalledWith({
+    movieId: mockData.results[0].movieId.idTMDB,
+    rateId: mockData.results[0].id,
+  });
 });
 
 it('right classes and inline styles', async () => {

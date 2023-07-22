@@ -2,7 +2,10 @@ const linkRoutes = {
   cardMovieSmall: (id) => `/movie/${id}`,
   cardReviewUser: (id) => `/movie/${id}`,
   cardReviewMovie: (id) => `/user/${id}`,
-  cardRateUser: (id) => `/movie/${id}`,
+  cardRateUser: {
+    movie: (id) => `/movie/${id}`,
+    editRate: (id) => `/rate-form/${id}`,
+  },
   cardMovieMedium: (id) => `/movie/${id}`,
   cardMovieEditItem: (id) => `/movie/${id}`,
   ListMovieItem: ({ userId, listId }) => `/user/${userId}/lists/${listId}`,

@@ -2,7 +2,7 @@ import { LoadingButton } from '@mui/lab';
 import {
   Box, Button, Container, Grid, Typography,
 } from '@mui/material';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import AddCircleOutlineSharpIcon from '@mui/icons-material/AddCircleOutlineSharp';
 import useRatesUser from 'src/hooks/use-rates-user';
 import { Link, Navigate, useParams } from 'react-router-dom';
@@ -13,13 +13,20 @@ import PageLayout from 'src/components/page-layout';
 import CardRateUser from 'src/components/card-rate-user';
 import helperFunctions from 'src/utils/helper-functions';
 import linkRoutes from 'src/utils/link-routes';
+import { deleteRate } from 'src/services/rate-write';
+import ModalNotification from 'src/components/modal-notification';
+import ModalConfirmation from 'src/components/modal-confirmation';
 
 export default function UserRates() {
-  const { user } = useUserAuth();
+  const { user, removeItem } = useUserAuth();
   const { id } = useParams();
+  const [modalDeleted, setModalDeleted] = useState(false);
   const {
-    data, loading, loadingNextPage, setPage, error,
-  } = useRatesUser({ id });
+    data, loading, loadingNextPage, setPage, error, setError, setLoading,
+  } = useRatesUser({ id, modalDeleted });
+  const [selectedResource, setSelectedResource] = useState({});
+
+  const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
 
   const debounceHandleNextPage = useMemo(() => throttle(
     () => setPage((prevPage) => prevPage + 1),
@@ -27,11 +34,64 @@ export default function UserRates() {
     { leading: true },
   ), [setPage]);
 
+  const handleOpenDeleted = () => {
+    setModalDeleted(true);
+  };
+
+  const handleCloseDeleted = () => {
+    setModalDeleted(false);
+  };
+
+  const debounceHandleConfirmDelete = useMemo(() => throttle(
+    async () => {
+      try {
+        setLoading(true);
+        await deleteRate({
+          movieId: selectedResource.movieId,
+          rateId: selectedResource.rateId,
+        });
+
+        setSelectedResource({});
+        setModalConfirmDelete(false);
+        handleOpenDeleted();
+      } catch (e) {
+        setError(e);
+        setLoading(false);
+        setModalConfirmDelete(false);
+      }
+    },
+    3000,
+    { leading: true },
+  ), [
+    selectedResource.rateId, selectedResource.movieId, setError, setLoading]);
+
+  const handleCloseConfirmDeleted = () => {
+    setModalConfirmDelete(false);
+    setSelectedResource({});
+  };
+
   if (loading || helperFunctions.isObjectEmpty(user)) return <Loading />;
 
   if (error?.status === 404) return <Navigate to="/404" />;
 
+  if (error?.status === 401 && id === user?.id) {
+    // Chaeck if the user is the owner of the resource
+    removeItem('user');
+    return <Navigate to="/registration" />;
+  }
+
   if (error) return <Navigate to="/error" />;
+
+  let handleDelete;
+  if (user?.id === id) {
+    handleDelete = ({ rateId, movieId }) => {
+      setModalConfirmDelete(true);
+      setSelectedResource({
+        rateId,
+        movieId,
+      });
+    };
+  }
 
   return (
     <PageLayout>
@@ -75,7 +135,7 @@ export default function UserRates() {
               xs={12}
               key={item.id}
             >
-              <CardRateUser data={item} />
+              <CardRateUser data={{ ...item, handleDelete }} />
             </Grid>
           ))}
         </Grid>
@@ -95,6 +155,9 @@ export default function UserRates() {
             More
           </LoadingButton>
         </Box>
+
+        <ModalConfirmation body={'Are you sure you want to delete the resource? Can\'t get it back after?'} title="The resource will be deleted" open={modalConfirmDelete} handleClose={handleCloseConfirmDeleted} handleConfirm={debounceHandleConfirmDelete} />
+        <ModalNotification title="Successfully deleted" body="Resource deleted successfully" handleClose={handleCloseDeleted} open={modalDeleted} />
       </Container>
     </PageLayout>
   );
