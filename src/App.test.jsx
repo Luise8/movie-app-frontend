@@ -70,23 +70,18 @@ describe('landing on a existent pages', () => {
     expect(screen.getByTestId(/movie-reviews/i)).toBeInTheDocument();
   });
 
-  it('movie-one-review', () => {
-    renderWithRouter(<App />, { route: '/movie/123/reviews/999' });
-    expect(screen.getByTestId(/movie-one-review/i)).toBeInTheDocument();
-  });
-
   it('user-edit-form', () => {
     renderWithRouter(<App />, { route: '/user-edit-form' });
     expect(screen.getByTestId(/user-edit-form/i)).toBeInTheDocument();
   });
 
   it('review-form', () => {
-    renderWithRouter(<App />, { route: '/review-form' });
+    renderWithRouter(<App />, { route: '/review-form/123' });
     expect(screen.getByTestId(/review-form/i)).toBeInTheDocument();
   });
 
   it('rate-form', () => {
-    renderWithRouter(<App />, { route: '/rate-form' });
+    renderWithRouter(<App />, { route: '/rate-form/123' });
     expect(screen.getByTestId(/rate-form/i)).toBeInTheDocument();
   });
 
@@ -101,7 +96,7 @@ describe('landing on a existent pages', () => {
   });
 
   it('list-edit-form', () => {
-    renderWithRouter(<App />, { route: '/list-edit-form' });
+    renderWithRouter(<App />, { route: '/list-edit-form/123/132' });
     expect(screen.getByTestId(/list-edit-form/i)).toBeInTheDocument();
   });
 

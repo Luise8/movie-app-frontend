@@ -132,11 +132,6 @@ jest.mock('src/pages/movie', () => ({
   default: jest.fn(() => <div data-testid="movie" />),
 }));
 
-jest.mock('src/pages/movie-one-review', () => ({
-  __esModule: true,
-  default: jest.fn(() => <div data-testid="movie-one-review" />),
-}));
-
 jest.mock('src/pages/movie-reviews', () => ({
   __esModule: true,
   default: jest.fn(() => <div data-testid="movie-reviews" />),
