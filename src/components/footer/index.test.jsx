@@ -7,12 +7,16 @@ import { ThemeProvider } from '@emotion/react';
 import darkTheme from 'src/utils/darkTheme';
 import linkRoutes from 'src/utils/link-routes';
 import Footer from 'src/components/footer';
+import { MemoryRouter } from 'react-router-dom';
 
 it('right render', () => {
   render(
-    <ThemeProvider theme={darkTheme}>
-      <Footer />
-    </ThemeProvider>,
+    <MemoryRouter>
+      <ThemeProvider theme={darkTheme}>
+        <Footer />
+      </ThemeProvider>
+      ,
+    </MemoryRouter>,
   );
   expect(screen.getByTestId('footer')).toBeInTheDocument();
   const footer = screen.getByRole('contentinfo');
@@ -22,6 +26,11 @@ it('right render', () => {
     name: /Created by Luis E. Gamez/i,
   });
   expect(githubLinkOne).toHaveAttribute('href', linkRoutes.footer.github);
+
+  const creditsLink = within(footer).getByRole('link', {
+    name: /credits/i,
+  });
+  expect(creditsLink).toHaveAttribute('href', linkRoutes.footer.credits);
 
   const websiteLink = within(footer).getByRole('link', {
     name: /Website for Luis E. Gamez/i,
@@ -41,9 +50,12 @@ it('right render', () => {
 
 it('right classes and inline styles', () => {
   render(
-    <ThemeProvider theme={darkTheme}>
-      <Footer />
-    </ThemeProvider>,
+    <MemoryRouter>
+      <ThemeProvider theme={darkTheme}>
+        <Footer />
+      </ThemeProvider>
+      ,
+    </MemoryRouter>,
   );
 
   expect(screen.getByTestId('footer')).toHaveClass('footer');

@@ -7,6 +7,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import appResourcesPath from 'src/utils/app-resources-path';
 import linkRoutes from 'src/utils/link-routes';
+import { Link as LinkRouter } from 'react-router-dom';
 
 export default function Footer() {
   const theme = useTheme();
@@ -32,6 +33,13 @@ export default function Footer() {
           }}
         >
           Created by Luis E. Gamez
+        </Link>
+        <Link
+          to={linkRoutes.footer.credits}
+          color="inherit"
+          component={LinkRouter}
+        >
+          Credits
         </Link>
         <Link
           href={linkRoutes.footer.website}

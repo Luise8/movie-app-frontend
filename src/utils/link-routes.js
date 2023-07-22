@@ -52,6 +52,7 @@ const linkRoutes = {
     website: 'https://luisegamez.netlify.app/',
     github: 'https://github.com/Luise8',
     linkedin: 'https://www.linkedin.com/in/luis-e-gamez-prado/',
+    credits: '/credits',
   },
   userProfile: (id) => `/user/${id}`,
   oneListUser: ({ userId, listId }) => `/list-edit-form/${userId}/${listId}`,
