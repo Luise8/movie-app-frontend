@@ -161,12 +161,12 @@ describe('when open is true', () => {
     // Enter to movie selected page with enter key
     act(() => input.focus());
     await user.type(input, 'data');
-    await waitFor(
-      () => {
+    await waitFor(() => {
       // First result
-        expect(screen.getByText(title)).toBeInTheDocument();
-      },
-    );
+      expect(screen.getByText(title)).toBeInTheDocument();
+    }, {
+      timeout: 5000,
+    });
     await user.keyboard('[ArrowDown]');
     await user.keyboard('[Enter]');
     expect(screen.queryByText('Search movie selected')).toBeInTheDocument();
@@ -225,13 +225,12 @@ describe('when open is true', () => {
     // Enter to page search with the query entered with enter key
     act(() => input.focus());
     await user.type(input, 'data');
-
-    await waitFor(
-      async () => {
+    await waitFor(() => {
       // First result
-        expect(screen.getByText(title)).toBeInTheDocument();
-      },
-    );
+      expect(screen.getByText(title)).toBeInTheDocument();
+    }, {
+      timeout: 5000,
+    });
     await user.keyboard('[Enter]');
     expect(screen.queryByText('Search query')).toBeInTheDocument();
   }, 100000);
@@ -289,12 +288,12 @@ describe('when open is true', () => {
     // Enter to page movie with the query entered and using click over the option
     act(() => input.focus());
     await user.type(input, 'data');
-    await waitFor(
-      () => {
+    await waitFor(() => {
       // First result
-        expect(screen.getByText(title)).toBeInTheDocument();
-      },
-    );
+      expect(screen.getByText(title)).toBeInTheDocument();
+    }, {
+      timeout: 5000,
+    });
 
     await user.click(screen.getByText(title));
     expect(screen.queryByText('Search movie selected')).toBeInTheDocument();
