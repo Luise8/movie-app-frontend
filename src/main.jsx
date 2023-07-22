@@ -11,9 +11,13 @@ import darkTheme from 'src/utils/darkTheme';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-      </ThemeProvider>
+      <UserAuthContextProvider>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </UserAuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
+
 );
