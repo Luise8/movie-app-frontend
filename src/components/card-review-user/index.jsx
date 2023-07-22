@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {
   Box,
-  CardActionArea, CardHeader, Collapse, Rating, Stack,
+  CardActionArea, CardHeader, Collapse, IconButton, Rating, Stack,
 } from '@mui/material';
 import { PropTypes } from 'prop-types';
 import 'src/components/card-review-user/styles.css';
@@ -13,12 +13,14 @@ import { Link } from 'react-router-dom';
 import linkRoutes from 'src/utils/link-routes';
 import appResourcesPath from 'src/utils/app-resources-path';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import HandymanSharpIcon from '@mui/icons-material/HandymanSharp';
+import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp';
 
 export default function CardReviewUser({
   data,
 }) {
   const {
-    title, body, date, movieId,
+    title, body, date, movieId, handleDelete, id,
   } = data;
   const releaseDate = movieId.release_date && typeof movieId.release_date === 'string' ? ` (${movieId.release_date.slice(0, 4)})` : '';
 
@@ -31,7 +33,7 @@ export default function CardReviewUser({
         data-testid="card-review-user-container-image"
         className="card-review-user-container-image"
         component={Link}
-        to={linkRoutes.cardReviewUser(movieId.idTMDB)}
+        to={linkRoutes.cardReviewUser.movie(movieId.idTMDB)}
       >
         <CardMedia
           className="card-review-user-card-media"
@@ -47,7 +49,12 @@ export default function CardReviewUser({
         <CardActionArea
           data-testid="link-title"
           component={Link}
-          to={linkRoutes.cardReviewUser(movieId.idTMDB)}
+          to={linkRoutes.cardReviewUser.movie(movieId.idTMDB)}
+          sx={{
+            width: {
+              xs: '95%',
+            },
+          }}
         >
           <CardHeader
             title={`${movieId.name}${releaseDate}`}
@@ -121,6 +128,35 @@ export default function CardReviewUser({
           </Collapse>
         </CardContent>
       </Box>
+      {handleDelete && (
+        <Box
+          className="card-review-user-container-edit-buttons"
+          data-testid="card-review-user-container-edit-buttons"
+        >
+          <IconButton
+            component={Link}
+            to={linkRoutes.cardReviewUser.editReview(movieId.idTMDB)}
+            size="small"
+            variant="contained"
+            aria-label="update review"
+            color="info"
+          >
+            <HandymanSharpIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => handleDelete({
+              movieId: movieId.idTMDB, reviewId: id,
+            })}
+            size="small"
+            variant="contained"
+            aria-label="delete review"
+            color="error"
+          >
+            <HighlightOffSharpIcon />
+          </IconButton>
+
+        </Box>
+      )}
     </Card>
   );
 }
@@ -131,6 +167,8 @@ CardReviewUser.propTypes = {
     body: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
+    handleDelete: PropTypes.func,
+    id: PropTypes.string.isRequired,
     movieId: PropTypes.shape({
       name: PropTypes.string.isRequired,
       photo: PropTypes.string,

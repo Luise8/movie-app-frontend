@@ -1,6 +1,9 @@
 const linkRoutes = {
   cardMovieSmall: (id) => `/movie/${id}`,
-  cardReviewUser: (id) => `/movie/${id}`,
+  cardReviewUser: {
+    movie: (id) => `/movie/${id}`,
+    editReview: (id) => `/review-form/${id}`,
+  },
   cardReviewMovie: (id) => `/user/${id}`,
   cardRateUser: {
     movie: (id) => `/movie/${id}`,

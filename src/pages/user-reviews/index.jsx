@@ -14,13 +14,24 @@ import Loading from 'src/components/loading';
 import PageLayout from 'src/components/page-layout';
 import linkRoutes from 'src/utils/link-routes';
 import helperFunctions from 'src/utils/helper-functions';
+import ModalConfirmation from 'src/components/modal-confirmation';
+import ModalNotification from 'src/components/modal-notification';
 
 export default function UserReviews() {
-  const { user } = useUserAuth();
+  const { user, removeItem } = useUserAuth();
   const { id } = useParams();
   const {
-    data, loading, loadingNextPage, setPage, error,
-  } = useReviewsUser({ id });
+    data,
+    loading,
+    loadingNextPage,
+    setPage,
+    error,
+    modalConfirmDelete,
+    modalDeleted,
+    handleCloseDeleted,
+    debounceHandleConfirmDelete,
+    handleCloseConfirmDeleted,
+  } = useReviewsUser({ id, user });
 
   const debounceHandleNextPage = useMemo(() => throttle(
     () => setPage((prevPage) => prevPage + 1),
@@ -31,6 +42,12 @@ export default function UserReviews() {
   if (loading || helperFunctions.isObjectEmpty(user)) return <Loading />;
 
   if (error?.status === 404) return <Navigate to="/404" />;
+
+  if (error?.status === 401 && id === user?.id) {
+    // Chaeck if the user is the owner of the resource
+    removeItem('user');
+    return <Navigate to="/registration" />;
+  }
 
   if (error) return <Navigate to="/error" />;
 
@@ -76,6 +93,8 @@ export default function UserReviews() {
             More
           </LoadingButton>
         </Box>
+        <ModalConfirmation body={'Are you sure you want to delete the resource? Can\'t get it back after?'} title="The resource will be deleted" open={modalConfirmDelete} handleClose={handleCloseConfirmDeleted} handleConfirm={debounceHandleConfirmDelete} />
+        <ModalNotification title="Successfully deleted" body="Resource deleted successfully" handleClose={handleCloseDeleted} open={modalDeleted} />
       </Container>
     </PageLayout>
   );
