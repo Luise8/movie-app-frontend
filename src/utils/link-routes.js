@@ -70,6 +70,7 @@ const linkRoutes = {
     movie: (id) => `/movie/${id}`,
   },
   userEditForm: (userId) => `/user/${userId}`,
+  userLists: '/list-create-form',
 };
 
 export default linkRoutes;

@@ -20,7 +20,7 @@ jest.mock('src/services/get-data', () => ({
   getListsUser: jest.fn(() => (Promise.resolve(mockData))),
 }));
 
-const mockCurrentUser = {
+let mockCurrentUser = {
   id: mockData.user_details.id,
   username: mockData.user_details.username,
 };
@@ -47,9 +47,13 @@ jest.mock('src/components/page-layout', () => ({
 beforeEach(async () => {
   getListsUser.mockClear();
   ListMovieLists.mockClear();
+  mockCurrentUser = {
+    id: mockData.user_details.id,
+    username: mockData.user_details.username,
+  };
 });
 
-it('render right of initial page data after loading state', async () => {
+it('render right of initial page data after loading state with current user logged in that is the owner of the account', async () => {
   await act(async () => {
     render(
       <MemoryRouter initialEntries={[`/user/${mockCurrentUser.id}/lists`]}>
@@ -96,6 +100,40 @@ it('render right of initial page data after loading state', async () => {
   expect(screen.getByRole('button', {
     name: /more/i,
   })).toBeInTheDocument();
+
+  expect(screen.getByRole('link', {
+    name: /create list/i,
+  })).toHaveAttribute('href', linkRoutes.userLists);
+});
+
+it('render right initial page data after loading state with current user not logged in', async () => {
+  mockCurrentUser = null;
+  await act(async () => {
+    render(
+      <MemoryRouter initialEntries={[`/user/${mockData.user_details.id}/lists`]}>
+        <ThemeProvider theme={darkTheme}>
+          <Routes>
+            <Route path="/user/:id/lists" element={<UserLists />} />
+          </Routes>
+        </ThemeProvider>
+        ,
+      </MemoryRouter>,
+    );
+  });
+  expect(getListsUser).toBeCalled();
+
+  expect(screen.queryByLabelText(/Loading.../i)).not.toBeInTheDocument();
+
+  const pageLayout = screen.getByTestId('page-layout');
+  expect(pageLayout).toBeInTheDocument();
+
+  const page = within(pageLayout).getByTestId('page-user-lists');
+  expect(page).toBeInTheDocument();
+
+  // The link is not in the document
+  expect(screen.queryByRole('link', {
+    name: /create list/i,
+  })).not.toBeInTheDocument();
 });
 
 it('Render right initial loading state', async () => {
@@ -249,6 +287,10 @@ it('right classes and inline styles', async () => {
   })).toHaveStyle(`color: ${darkTheme.palette.secondary.light}`);
 
   expect(screen.getByTestId('total-results-margin')).toHaveClass('total-results-margin');
+
+  expect(screen.getByRole('link', {
+    name: /create list/i,
+  })).toHaveStyle(`background-color: ${darkTheme.palette.primary.main}`);
 
   // atribute of Button color secondary and variant contained
   expect(screen.getByRole('button', {
