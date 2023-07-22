@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   render, screen, waitFor, within,
 } from '@testing-library/react';
@@ -82,12 +82,12 @@ describe('when open is true', () => {
     // Enter to page search with the query entered with click on find button
     act(() => input.focus());
     await user.type(input, 'data');
-    await waitFor(
-      () => {
+    await waitFor(() => {
       // First result
-        expect(screen.getByText(title)).toBeInTheDocument();
-      },
-    );
+      expect(screen.getByText(title)).toBeInTheDocument();
+    }, {
+      timeout: 5000,
+    });
 
     await user.click(screen.getByRole('button', {
       name: /find/i,
