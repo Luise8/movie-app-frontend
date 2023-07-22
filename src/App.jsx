@@ -9,7 +9,6 @@ import ListCreateForm from 'src/pages/list-create-form';
 import ListEditForm from 'src/pages/list-edit-form';
 import LogIn from 'src/pages/login';
 import Movie from 'src/pages/movie';
-import MovieOneReview from 'src/pages/movie-one-review';
 import MovieReviews from 'src/pages/movie-reviews';
 import Popular from 'src/pages/popular';
 import RateForm from 'src/pages/rate-form';
@@ -44,7 +43,6 @@ export default function App() {
           <Route path="/user/:id/watchlist" element={<UserWatchlist />} />
           <Route path="/movie/:id" element={<Movie />} />
           <Route path="/movie/:id/reviews" element={<MovieReviews />} />
-          <Route path="/movie/:movieId/reviews/:reviewId" element={<MovieOneReview />} />
           <Route
             path="/review-form/:movieId"
             element={(
