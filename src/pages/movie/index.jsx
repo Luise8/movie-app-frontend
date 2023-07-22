@@ -33,7 +33,7 @@ export default function Movie() {
   const { user } = useUserAuth();
   const { id } = useParams();
   const {
-    data, loading, error, setError,
+    data, loading, error,
   } = useMovie(id);
   const [modalList, setModalList] = useState(false);
 
@@ -70,7 +70,7 @@ export default function Movie() {
           component="header"
           sx={{
             backgroundImage:
-              `linear-gradient(to left, rgba(0, 0, 0, .6), rgba(0, 0, 0, 1)), url(${data.images.backdrops[0].file_path ? images.backdropSize300(data.images.backdrops[0].file_path) : appResourcesPath.heeroDefault})`,
+              `linear-gradient(to left, rgba(0, 0, 0, .6), rgba(0, 0, 0, 1)), url(${data.images.backdrops[0]?.file_path ? images.backdropSize300(data.images.backdrops[0].file_path) : appResourcesPath.heeroDefault})`,
           }}
         >
           {downMd && (
@@ -89,9 +89,9 @@ export default function Movie() {
           >
             <img
               alt=""
-              src={data.images.posters[0].file_path
+              src={data.images.posters.length > 0
                 ? images.posterSize342(data.images.posters[0].file_path)
-                : appResourcesPath.cardMovieSmall}
+                : appResourcesPath.cardMovieSmall.noImageAvailable}
             />
           </Box>
           <Box
@@ -184,42 +184,46 @@ export default function Movie() {
               Images
             </Typography>
           </Container>
-          <Carousel
-            className="page-movie-carousel"
-            animation="slide"
-            autoPlay={false}
-            indicators
-            navButtonsAlwaysVisible
-            indicatorContainerProps={{
-              style: {
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                width: '80vw',
-                paddingLeft: '20px',
-                paddingRight: '20px',
-                maxWidth: '1100px',
-              },
-            }}
-          >
-            {
-            data.imageGroups.map((item) => (
-              <Box
-                className="page-movie-container-items-images-section"
-                key={uniqid()}
-
+          {data.images.posters.length === 0
+            ? <Typography marginLeft={3} color="text.secondary">There are not results.</Typography>
+            : (
+              <Carousel
+                className="page-movie-carousel"
+                animation="slide"
+                autoPlay={false}
+                indicators
+                navButtonsAlwaysVisible
+                indicatorContainerProps={{
+                  style: {
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    width: '80vw',
+                    paddingLeft: '20px',
+                    paddingRight: '20px',
+                    maxWidth: '1100px',
+                  },
+                }}
               >
-                {item.map((inner) => (
-                  <img
-                    key={inner.file_path}
-                    alt=""
-                    src={images.posterSize185(inner.file_path)}
-                  />
-                ))}
+                {
+                data.imageGroups.map((item) => (
+                  <Box
+                    className="page-movie-container-items-images-section"
+                    key={uniqid()}
 
-              </Box>
-            ))
-}
-          </Carousel>
+                  >
+                    {item.map((inner) => (
+                      <img
+                        key={inner.file_path}
+                        alt=""
+                        src={images.posterSize185(inner.file_path)}
+                      />
+                    ))}
+
+                  </Box>
+                ))
+              }
+              </Carousel>
+            )}
         </Box>
         <Divider flexItem />
         <Box
@@ -239,49 +243,53 @@ export default function Movie() {
               Videos
             </Typography>
           </Container>
-          <Carousel
-            animation="slide"
-            autoPlay={false}
-            indicators={false}
-            navButtonsAlwaysVisible
-            className="page-movie-carousel"
-          >
-            {data.videos.results.map((item) => (
-              <Card
-                className="page-movie-card-video"
-                key={item.id}
-                sx={{
-                }}
+          {data.videos.results.length === 0
+            ? <Typography marginLeft={3} color="text.secondary">There are not results.</Typography>
+            : (
+              <Carousel
+                animation="slide"
+                autoPlay={false}
+                indicators={false}
+                navButtonsAlwaysVisible
+                className="page-movie-carousel"
               >
-                <CardActionArea>
-                  <CardHeader
-                    className="page-movie-card-video-header"
-                    title={(
+                {data.videos.results.map((item) => (
+                  <Card
+                    className="page-movie-card-video"
+                    key={item.id}
+                    sx={{
+                    }}
+                  >
+                    <CardActionArea>
+                      <CardHeader
+                        className="page-movie-card-video-header"
+                        title={(
 
-                      <Typography
-                        variant="h6"
-                        noWrap
-                      >
-                        {item.name}
-                      </Typography>
+                          <Typography
+                            variant="h6"
+                            noWrap
+                          >
+                            {item.name}
+                          </Typography>
 
-                  )}
-                  />
-                  <CardMedia
-                    className="page-movie-video"
-                    data-testid="page-movie-video"
-                    component="iframe"
-                    alt={item.name}
-                    image={videos.youtube(item.key)}
-                    src={videos.youtube(item.key)}
-                    title={item.name}
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </CardActionArea>
-              </Card>
-            ))}
-          </Carousel>
+                      )}
+                      />
+                      <CardMedia
+                        className="page-movie-video"
+                        data-testid="page-movie-video"
+                        component="iframe"
+                        alt={item.name}
+                        image={videos.youtube(item.key)}
+                        src={videos.youtube(item.key)}
+                        title={item.name}
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </CardActionArea>
+                  </Card>
+                ))}
+              </Carousel>
+            )}
         </Box>
         <Divider flexItem />
         <Box
@@ -382,34 +390,38 @@ export default function Movie() {
               Similar movies
             </Typography>
           </Container>
-          <Carousel
-            className="page-movie-carousel"
-            animation="slide"
-            autoPlay={false}
-            indicators
-            navButtonsAlwaysVisible
-            indicatorContainerProps={{
-              style: {
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                width: '80vw',
-                paddingLeft: '20px',
-                paddingRight: '20px',
-                maxWidth: '1100px',
-              },
-            }}
-          >
-            {
-              data.similarGroups.map((item) => (
-                <Box
-                  className="page-movies-container-items-similar-movies-section"
-                  key={uniqid()}
-                >
-                  <ListGridMovies list={item} wrap="noWrap" />
-                </Box>
-              ))
-}
-          </Carousel>
+          {data.similar.results.length === 0
+            ? <Typography marginLeft={3} color="text.secondary">There are not results.</Typography>
+            : (
+              <Carousel
+                className="page-movie-carousel"
+                animation="slide"
+                autoPlay={false}
+                indicators
+                navButtonsAlwaysVisible
+                indicatorContainerProps={{
+                  style: {
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    width: '80vw',
+                    paddingLeft: '20px',
+                    paddingRight: '20px',
+                    maxWidth: '1100px',
+                  },
+                }}
+              >
+                {
+                data.similarGroups.map((item) => (
+                  <Box
+                    className="page-movies-container-items-similar-movies-section"
+                    key={uniqid()}
+                  >
+                    <ListGridMovies list={item} wrap="noWrap" />
+                  </Box>
+                ))
+              }
+              </Carousel>
+            )}
         </Box>
         {user?.id && (
         <ModalAddMovieToList

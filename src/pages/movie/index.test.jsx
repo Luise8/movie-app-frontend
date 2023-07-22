@@ -297,9 +297,24 @@ it('render right initial page with full movie information, after loading state o
   expect(reviewButton).toHaveAttribute('href', linkRoutes.movie.registration);
 });
 
-it('render right initial page without full movie information, after loading state of user logged in', async () => {
+it.only('render right initial page without full movie information, after loading state of user logged in', async () => {
   getMovieDetail.mockImplementationOnce(() => Promise.resolve({
-    ...mockMovie, genres: [], overview: '', release_date: '', runtime: '', movieDB: null,
+    ...mockMovie,
+    genres: [],
+    overview: '',
+    release_date: '',
+    runtime: '',
+    movieDB: null,
+    images: {
+      posters: [],
+      backdrops: [],
+    },
+    similar: {
+      results: [],
+    },
+    videos: {
+      results: [],
+    },
   }));
   await act(async () => {
     render(
@@ -323,8 +338,8 @@ it('render right initial page without full movie information, after loading stat
   expect(page).toBeInTheDocument();
 
   const header = screen.getByTestId(/page-movie-header/i);
-  // Only change this information
 
+  // Only change this information
   expect(within(header).queryAllByRole('radio')).toHaveLength(0);
 
   const valueWithStars = '0 Stars';
@@ -339,6 +354,14 @@ it('render right initial page without full movie information, after loading stat
 
   expect(screen.getByText('No information of genres.')).toBeInTheDocument();
 
+  const sectionImages = screen.getByTestId(/page-movie-section-images/i);
+
+  expect(within(sectionImages).getByText(/there are not results./i)).toBeInTheDocument();
+
+  const sectionVideos = screen.getByTestId(/page-movie-section-videos/i);
+
+  expect(within(sectionVideos).getByText(/there are not results./i)).toBeInTheDocument();
+
   const sectionRates = screen.getByTestId(/page-movie-section-rates/i);
 
   const setcionRatesRatingMatcher = '0 Stars';
@@ -349,6 +372,10 @@ it('render right initial page without full movie information, after loading stat
   const sectionReviews = screen.getByTestId(/page-movie-section-reviews/i);
 
   expect(within(sectionReviews).getByText('Total: 0 reviews')).toBeInTheDocument();
+
+  const sectionSimilarMovies = screen.getByTestId(/page-movie-section-similar-movies/i);
+
+  expect(within(sectionSimilarMovies).getByText(/there are not results./i)).toBeInTheDocument();
 });
 
 it('ModalAddMovieToList called with right props and functions', async () => {

@@ -87,7 +87,8 @@ export default function useMovie(id) {
   useEffect(() => {
     setLoading(true);
     if (data === undefined || helperFunctions.isObjectEmpty(data)
-      || (data.similar.length === 0 && data.images.length === 0 && data.videos.length === 0)) {
+      || (data.similar.results.length
+        === 0 && data.images.posters.length === 0 && data.videos.results.length === 0)) {
       return;
     }
     if (down400) {
