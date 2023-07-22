@@ -1,0 +1,16 @@
+.page-credits.MuiContainer-root {
+  padding-top: 20px;
+}
+.page-credits.MuiContainer-root .MuiTypography-root {
+  margin-bottom: 10px;
+}
+.page-credits-container-tmdb-logo.MuiBox-root {
+  width: 215px;
+  max-width: 90vw;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.page-credits-container-tmdb-logo.MuiBox-root img {
+  width: 100%;
+}
