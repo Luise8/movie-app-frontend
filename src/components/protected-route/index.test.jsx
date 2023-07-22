@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 import { useUserAuth } from 'src/context/auth';
@@ -78,9 +78,14 @@ it('right render when user is not logged in', async () => {
       <TestComponent info={info} />
     </ProtectedRoute>,
   );
-  expect(Loading).toHaveBeenCalled();
-  expect(Navigate).toHaveBeenCalled();
-  expect(await screen.findByText(new RegExp(navigateText, 'i'))).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+
+    // Redirect to right page
+    expect(Navigate).toHaveBeenCalledWith({
+      to: '/registration',
+    }, {});
+  });
 });
 
 it('right render while getting user data', async () => {
