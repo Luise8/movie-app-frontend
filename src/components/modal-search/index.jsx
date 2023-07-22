@@ -110,7 +110,7 @@ function AutocompleteSearch({ inputValue, setInputValue }) {
           width: '100%',
           maxWidth: '400px',
         }}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => option.title || ''}
         filterOptions={(x) => x}
         options={options}
         // To remove hover when mouseleve the textbox
@@ -134,6 +134,7 @@ function AutocompleteSearch({ inputValue, setInputValue }) {
         loading={loading}
         filterSelectedOptions
         onHighlightChange={(e, option, reason) => onChangeHighligh(e, option, reason)}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         noOptionsText="No movies"
         onChange={(event, newValue) => {
           setOptions(newValue ? [newValue, ...options] : options);
@@ -157,7 +158,7 @@ function AutocompleteSearch({ inputValue, setInputValue }) {
             <Grid
               container
               component={Link}
-              to={`movie/${option.id}`}
+              to={`/movie/${option.id}`}
               sx={{ textDecoration: 'none' }}
             >
               <Grid item xs={12}>
