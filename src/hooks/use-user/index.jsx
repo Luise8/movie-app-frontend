@@ -17,7 +17,9 @@ export default function useUser(id) {
         }
         const dataFetched = await getUser(id);
         if (mounted) {
-          setData(dataFetched);
+          let listsWithUser = dataFetched.lists.slice();
+          listsWithUser = listsWithUser.map((item) => ({ ...item, userId: dataFetched.id }));
+          setData({ ...dataFetched, lists: listsWithUser });
           setError(false);
           setLoading(false);
         }
