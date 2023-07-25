@@ -21,6 +21,7 @@ npm start
 
 ### Pictures
 ![home](https://imgur.com/PYh9UNq.png)
+![home2](https://imgur.com/kENC6Jl.png)
 ![profile](https://imgur.com/vVoRZ5e.png)
 ![movie](https://imgur.com/smzNRKs.png)
 ![movie2](https://imgur.com/9UnSa7l.png)
