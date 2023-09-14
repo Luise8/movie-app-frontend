@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 /* hide repcaptcha */
 .grecaptcha-badge {
   visibility: hidden;
