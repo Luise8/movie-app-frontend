@@ -5,7 +5,7 @@ import {
   Collapse,
   Container, IconButton, Typography, Avatar, TextField,
 } from '@mui/material';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import AddCircleOutlineSharpIcon from '@mui/icons-material/AddCircleOutlineSharp';
 import {
   Navigate, useNavigate,
@@ -20,6 +20,7 @@ import SaveAsIcon from '@mui/icons-material/SaveAs';
 import CloseIcon from '@mui/icons-material/Close';
 import ModalNotification from 'src/components/modal-notification';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import useRecaptcha from 'src/hooks/useRecaptcha';
 
 export default function LogIn() {
   const { user, logInContext } = useUserAuth();
@@ -28,6 +29,7 @@ export default function LogIn() {
   const [isLoadingSave, setIsLoadingSave] = useState(false);
   const [error, setError] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const reCaptchaLoaded = useRecaptcha();
 
   const navigate = useNavigate();
   const debounceHandleSave = useMemo(() => throttle(
@@ -173,7 +175,7 @@ export default function LogIn() {
             loadingPosition="end"
             endIcon={isLoadingSave ? <AddCircleOutlineSharpIcon /> : <SaveAsIcon />}
             variant={isLoadingSave ? 'outlined' : 'contained'}
-            disabled={isLoadingSave === true}
+            disabled={isLoadingSave === true || !reCaptchaLoaded}
           >
             Save
           </LoadingButton>

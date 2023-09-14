@@ -21,6 +21,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import ModalNotification from 'src/components/modal-notification';
 import { createUser } from 'src/services/user-write';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import useRecaptcha from 'src/hooks/useRecaptcha';
 
 export default function SignUp() {
   const { user } = useUserAuth();
@@ -29,6 +30,7 @@ export default function SignUp() {
   const [isLoadingSave, setIsLoadingSave] = useState(false);
   const [error, setError] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const reCaptchaLoaded = useRecaptcha();
 
   const navigate = useNavigate();
   const debounceHandleSave = useMemo(() => throttle(
@@ -172,7 +174,7 @@ export default function SignUp() {
             loadingPosition="end"
             endIcon={isLoadingSave ? <AddCircleOutlineSharpIcon /> : <SaveAsIcon />}
             variant={isLoadingSave ? 'outlined' : 'contained'}
-            disabled={isLoadingSave === true}
+            disabled={isLoadingSave === true || !reCaptchaLoaded}
           >
             Save
           </LoadingButton>
